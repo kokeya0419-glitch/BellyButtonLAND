@@ -18,7 +18,7 @@ session_start();
             <div class="account">
                 <?php
                 if(!empty($_SESSION['login'])){
-                    $loginName = $_SESSION(user_name);
+                    $loginName = $_SESSION(['user_name']);
                     echo '<p class="accountName">' . $loginName . '様&nbsp;<a href="logout.php"><i class="fas fa-sign-out-alt"></i></p>';
                 } else {
                     $loginName = 'ゲスト';
