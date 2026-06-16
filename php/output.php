@@ -1,6 +1,6 @@
 <?php
-require_once 'php/functions.php';
-include 'php/header.php';
+require_once __DIR__ . '/functions.php';
+include __DIR__ . '/header.php';
 
 if (!empty($_POST['name'])) {
     $name = h($_POST['name']);
@@ -17,7 +17,7 @@ if (!empty($_POST['tel'])) {
 } else {
     $tel = '';
 }
-if (!empty($_comment['comment'])) {
+if (!empty($_POST['comment'])) {
     $comment = h($_POST['comment']);
 } else {
     $comment = '';
@@ -39,12 +39,12 @@ if (!empty($_comment['comment'])) {
             <h2>お名前</h2>
             <p>
                 <?= $name; ?>
-                <input type="hidden" name="name" value=" <?= $name; ?>">
+                <input type="hidden" name="name" value="<?= $name; ?>">
             </p>
             <h2>メールアドレス</h2>
             <p>
                 <?= $email; ?>
-                <input type="hidden" name="mail" value="<?= $email; ?>">
+                <input type="hidden" name="email" value="<?= $email; ?>">
             </p>
             <h2>電話番号</h2>
             <p>
