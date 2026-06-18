@@ -52,7 +52,7 @@ if (!empty($_POST['tel'])) {
                     <h2>お名前</h2>
                     <p>
                         <?= $user_name; ?>
-                        <input type="hidden" name="user_name" value=" <?= $user_name; ?>">
+                        <input type="hidden" name="user_name" value="<?= $user_name; ?>">
                     </p>
                 </div>
                 <h2>メールアドレス</h2>

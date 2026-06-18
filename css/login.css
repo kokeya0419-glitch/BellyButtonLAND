@@ -1,98 +1,167 @@
 /* ==========================================
-   ログイン画面専用スタイル（login.css）
+   BBland 会員ログイン画面専用スタイル
    ========================================== */
-.login-card {
-  border-radius: 25px !important;
-  background-color: #ffffff;
+
+/* --- 1. パンくずリストの装飾 --- */
+#breadcrumb {
+  max-width: 500px;
+  margin: 30px auto 0 auto;
+  padding: 0 15px;
 }
 
-.login-title {
-  font-size: 1.8rem;
-  font-weight: 900;
-  color: #ff7675; /* BBlandピンク */
-  letter-spacing: 0.05em;
-  margin-bottom: 5px;
-}
-
-.login-subtitle {
+#breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
   font-size: 0.85rem;
-  color: #a4b0be;
   font-weight: bold;
 }
 
-/* 入力欄のラベル */
-.form-label {
+#breadcrumb li {
+  color: #747d8c;
+  margin-right: 8px;
+}
+
+#breadcrumb a {
+  color: #a4b0be;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+#breadcrumb a:hover {
+  color: #ff7675; /* ホバー時にBBlandピンク */
+}
+
+/* --- 2. メインコンテナ（全体の配置調整） --- */
+article {
+  max-width: 500px;
+  margin: 40px auto 60px auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+article h1 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #ff7675; /* BBlandピンク */
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+/* 案内文（会員登録がお済みでない方は…） */
+article > p.text-center {
+  font-size: 0.85rem;
+  color: #747d8c;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* 案内文の中にある「会員登録」ボタン */
+article > p.text-center button {
+  background-color: transparent;
+  color: #ff7675;
+  border: 2px solid #ff7675;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 4px 14px;
+  margin-left: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+article > p.text-center button:hover {
+  background-color: #fff1c5; /* ホバー時に薄黄色 */
+  border-color: #fff1c5;
+}
+
+/* --- 3. 警告メッセージ（PHPのエラー出力） --- */
+p.warning {
+  background-color: #fff1c5; /* 薄黄色 */
+  color: #ff7675;
+  border-radius: 15px;
+  padding: 14px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 25px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(255, 118, 117, 0.05);
+}
+
+/* --- 4. ログインフォーム（白いカード部分） --- */
+.contents {
+  background-color: #ffffff;
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(255, 118, 117, 0.06); /* ほんのりピンクを混ぜた影 */
+}
+
+/* ラベル（メールアドレス / パスワード） */
+.formFlex label,
+.label label {
   font-size: 0.85rem;
   font-weight: bold;
   color: #57606f;
   margin-left: 4px;
+  display: inline-block;
 }
 
-/* 入力フォームのカスタム */
-.custom-input {
-  border-radius: 15px !important;
-  padding: 12px 18px !important;
-  height: auto !important;
+/* pタグのデフォルトの余白をリセット */
+.formFlex p,
+.label p,
+.field p {
+  margin: 0;
+}
+
+/* 入力エリア（メールアドレス・パスワード共通） */
+.field input[type="email"],
+.field input[type="password"] {
+  width: 100%;
+  border-radius: 15px;
+  padding: 14px 18px;
   border: 2px solid #f1f2f6;
   background-color: #fdfdfd;
   font-size: 0.95rem;
+  color: #2f3542;
+  outline: none;
+  box-sizing: border-box; /* パディングによる幅の突き抜け防止 */
   transition: all 0.2s ease;
+  margin-top: 6px;
+  margin-bottom: 20px;
 }
 
 /* 入力欄をクリック（フォーカス）したときのアニメーション */
-.custom-input:focus {
-  border-color: #ff7675 !important;
+.field input[type="email"]:focus,
+.field input[type="password"]:focus {
+  border-color: #ff7675;
   background-color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(255, 118, 117, 0.1) !important;
-  color: #2f3542;
+  box-shadow: 0 0 0 4px rgba(255, 118, 117, 0.1); /* 周りをフワッとピンクに光らせる */
 }
 
-/* ログインボタン */
-.btn-login {
-  background-color: #ff7675;
-  color: #ffffff !important;
+/* --- 5. 会員ログインボタン --- */
+.contents form p.text-center {
+  margin: 10px 0 0 0;
+}
+
+.contents form p.text-center button[type="submit"] {
+  width: 100%;
+  background-color: #ff7675; /* BBlandピンク */
+  color: #ffffff;
   font-weight: bold;
   border-radius: 15px;
-  padding: 12px !important;
+  padding: 14px;
   font-size: 1rem;
   border: none;
   box-shadow: 0 5px 15px rgba(255, 118, 117, 0.25);
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.btn-login:hover {
-  background-color: #e84118;
-  transform: translateY(-1px);
+.contents form p.text-center button[type="submit"]:hover {
+  background-color: #e84118; /* ホバー時に少し濃い赤ピンクへ */
+  transform: translateY(-1px); /* ボタンがわずかに浮き上がる */
   box-shadow: 0 7px 20px rgba(255, 118, 117, 0.35);
-}
-
-/* 区切り線 */
-.login-divider {
-  border-top: 2px dashed #f1f2f6; /* ポップな点線 */
-}
-
-/* 新規登録用の枠線ボタン */
-.btn-register-outline {
-  background-color: transparent;
-  color: #ff7675 !important;
-  border: 2px solid #ff7675;
-  font-weight: bold;
-  border-radius: 15px;
-  padding: 10px !important;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.btn-register-outline:hover {
-  background-color: #fff1c5; /* 薄黄色 */
-  border-color: #fff1c5;
-}
-
-/* パンくずリストの微調整 */
-.breadcrumb a {
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.breadcrumb a:hover {
-  color: #ff7675 !important;
 }

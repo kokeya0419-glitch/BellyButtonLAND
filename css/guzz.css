@@ -1,0 +1,184 @@
+@charset "UTF-8";
+
+/* ==========================================
+   1. グッズカード全体のベースデザイン（画像丸型版）
+   ========================================== */
+.card {
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+    border-radius: 16px !important;
+    overflow: hidden;
+    background-color: #ffffff;
+    text-align: center;
+    /* 💡 カード内のテキストや画像をすべて中央揃えにします */
+    position: relative;
+    /* 💡 ランキングバッジの基準位置にするためここに追加 */
+}
+
+/* マウスを乗せたらふわっと浮き上がる演出 */
+.col-lg-9 .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 118, 117, 0.12) !important;
+}
+
+/* 💡 商品画像を表示するエリアを正円にくり抜く設定 */
+.col-lg-9 .card img {
+    width: 130px !important;
+    /* 💡 縦横のサイズを同じにして正方形を作ります */
+    height: 130px !important;
+    /* 💡 縦横のサイズを同じにして正方形を作ります */
+    object-fit: cover;
+    border-radius: 50% !important;
+    /* 💡 50%にすることで完全に綺麗な「〇」になります */
+    margin: 15px auto 10px auto;
+    /* 💡 カードの真ん中に丸い画像が来るように調整 */
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    /* ほんのり影をつけて丸を引き立たせる */
+    transition: transform 0.5s ease;
+}
+
+/* マウスを乗せたときに、丸の中の画像が少し動く可愛い演出 */
+.col-lg-9 .card:hover img {
+    transform: scale(1.06) rotate(3deg);
+    /* 💡 少し拡大して、ちょっとだけ傾く楽しい動き */
+}
+
+/* ==========================================
+   2. 商品名・案内・お値段の文字装飾
+   ========================================== */
+/* 商品名 */
+.col-lg-9 .card h4 {
+    color: #2d3436;
+    font-size: 0.95rem !important;
+    line-height: 1.4;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* 商品案内（説明文） */
+.col-lg-9 .card p.text-muted {
+    font-size: 0.8rem !important;
+    line-height: 1.5;
+    color: #b2bec3 !important;
+    margin-bottom: 10px;
+}
+
+/* 値段（大きく目立たせる） */
+.col-lg-9 .card p.text-danger {
+    color: #ff7675 !important;
+    /* BBlandのテーマピンク */
+    font-size: 1.2rem !important;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   3. 🔥 売れ筋ランキング専用デザイン
+   ========================================== */
+/* ランキングバッジ（1位・2位・3位共通）の配置を固定 */
+#ranking .card .badge-ranking,
+#ranking .card span.badge {
+    position: absolute !important;
+    top: 15px !important;
+    left: 15px !important;
+    font-size: 0.8rem !important;
+    font-weight: bold;
+    padding: 5px 12px !important;
+    border-radius: 20px !important;
+    color: #ffffff !important;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 各順位の特別な色とグラデーション */
+/* 1位：ゴールドピンク */
+#ranking .col-md-4:nth-child(1) .card .badge-ranking,
+#ranking .col-md-4:nth-child(1) .card span.badge {
+    background: linear-gradient(135deg, #ff7675, #ef476f) !important;
+}
+
+/* 2位：トパーズイエロー */
+#ranking .col-md-4:nth-child(2) .card .badge-ranking,
+#ranking .col-md-4:nth-child(2) .card span.badge {
+    background: linear-gradient(135deg, #ffcb42, #ffd166) !important;
+}
+
+/* 3位：エメラルドミント */
+#ranking .col-md-4:nth-child(3) .card .badge-ranking,
+#ranking .col-md-4:nth-child(3) .card span.badge {
+    background: linear-gradient(135deg, #06d6a0, #1dd1a1) !important;
+}
+
+/* ==========================================
+   4. スマホ・タブレット時の表示調整（レスポンシブ）
+   ========================================== */
+@media (max-width: 767.98px) {
+
+    /* スマホのときは画像を少しコンパクトにして見やすくします */
+    .col-lg-9 .card img {
+        width: 100px !important;
+        height: 100px !important;
+        margin: 10px auto;
+    }
+
+    .col-lg-9 .card h4 {
+        font-size: 0.85rem !important;
+    }
+
+    .col-lg-9 .card p.text-muted {
+        font-size: 0.75rem !important;
+        margin-bottom: 5px !important;
+    }
+
+    .col-lg-9 .card p.text-danger {
+        font-size: 1.1rem !important;
+    }
+
+    #ranking .card .badge-ranking,
+    #ranking .card span.badge {
+        padding: 3px 9px !important;
+        font-size: 0.75rem !important;
+        top: 10px !important;
+        left: 10px !important;
+    }
+}
+
+
+/* ==========================================
+   サイドバー追従＆デザイン（見えなくならない調整）
+   ========================================== */
+.col-lg-3 {
+    position: relative;
+}
+
+.sidebar-sticky {
+    top: 110px !important; /* 固定ヘッダーに隠れない位置に調整 */
+    z-index: 100;
+}
+
+.btn-sidebar {
+    border-radius: 12px;
+    background-color: #fff1c5; /* BBlandの淡い黄色 */
+    color: #ff9f43 !important;  /* フードテーマのオレンジ */
+    border: none;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-sidebar:hover {
+    background-color: #ff9f43;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 991.98px) {
+    .food-main-container {
+        margin-top: 100px;
+    }
+    .sidebar-sticky {
+        position: static !important; /* スマホ時は追従解除して横並び */
+        margin-bottom: 30px;
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+}

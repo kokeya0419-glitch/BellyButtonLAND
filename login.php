@@ -3,14 +3,16 @@ require_once 'temp/functions.php';
 include 'temp/header.php';
 
 // 💡 改善：すでにログイン済みの場合はTOPページへ飛ばす
-if (!empty($_POST['login'])) {
+if (!empty($_SESSION['login'])) {
     $message = 'ログイン済みです。';
     header('Location: ./');
 } else {
-    if (empty($_POST['email']) || (empty($_POST['password']))) {
+    if ((empty($_POST['email'])) || (empty($_POST['password']))) {
         $message = 'ユーザー名、パスワードを入力してください。';
     } else {
+        // メアドとパスワードが入力されていたらtryの処理に入る
         try {
+            // echo '<script>alert("tryに入ったよ");</script>';
             $dbh = db_open();
             $sql = 'SELECT * FROM user WHERE email = :email';
             $stmt = $dbh->prepare($sql);
@@ -29,7 +31,25 @@ if (!empty($_POST['login'])) {
 
                 //ヘッダに表示されるヘッダ情報を取得
                 $_SESSION['user_name'] = $user['user_name'];
-                header('Location:./');
+?>
+                <!-- トップページに戻る -->
+                <!DOCTYPE html>
+                <html lang="ja">
+
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="refresh" content="3; URL=./main.php">
+                    <title>ログイン完了</title>
+                </head>
+
+                <body class="text-center">
+                    <p>ログインしました。</p>
+                    <p>3秒後にTOPページへ移動します。</p>
+                    <p>自動で戻らない場合は<a href="./main.php">ここをクリック</a></p>
+                </body>
+
+                </html>
+<?php
                 exit;
             } else {
                 $message = 'ユーザー名、もしくはパスワードが一致しません。';
@@ -63,10 +83,10 @@ if (!empty($_POST['login'])) {
     <div class="contents">
         <form action="login.php" method="POST" class="registration">
             <div class="formFlex">
-                <p><label for="mail">メールアドレス</label></p>
+                <p><label for="email">メールアドレス</label></p>
             </div>
             <div class="field">
-                <p><input type="email" name="email" id="email" placeholder="半角英数字"></p>
+                <p><input type="email" name="email" id="email" placeholder="半角英数字" autofocus></p>
             </div>
             <div class="label">
                 <p><label for="password">パスワード</label></p>

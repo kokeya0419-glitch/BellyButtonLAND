@@ -3,9 +3,9 @@ require_once './temp/functions.php';
 include './temp/header.php';
 
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-$created_date = date('Y-m-d');
-$updated_date = null;
-$deleted_date = null;
+$created_at = null;
+$updated_at = null;
+$deleted_at = null;
 
 //ユーザーデータ追加処理
 try {
@@ -26,15 +26,29 @@ try {
     echo '<a href="main.php">リストへ戻る</a>';
 ?>
 
-    <div id="breadcrumb">
-        <ol>
-            <li><a href="index.php">ホーム</a>&gt;</li>
-            <li>会員登録完了</li>
-        </ol>
-    </div>
-    <article>
-        <h1>会員登録完了</h1>
-    </article>
+    <!-- トップページに戻る -->
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="3; URL=./login.php">
+        <title>会員登録完了</title>
+    </head>
+
+    <body>
+        <div id="breadcrumb">
+            <ol>
+                <li><a href="./main.php">ホーム</a>&gt;</li>
+                <li>会員登録完了</li>
+            </ol>
+        </div>
+        <article>
+            <h1>会員登録完了</h1>
+        </article>
+
+        <p>3秒後にTOPページへ移動します。</p>
+        <p>自動で戻らない場合は<a href="./login.php">ここをクリック</a></p>
+    </body>
+
 
 <?php
 } catch (PDOException $e) {
