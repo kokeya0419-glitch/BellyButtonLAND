@@ -2,62 +2,84 @@
 require_once 'temp/functions.php';
 include 'temp/header.php';
 
+//バリデーションの準備
+$error = [];
+
 // 💡 改善：すでにログイン済みの場合はTOPページへ飛ばす
 if (!empty($_SESSION['login'])) {
     $message = 'ログイン済みです。';
-    header('Location: ./');
-} else {
-    if ((empty($_POST['email'])) || (empty($_POST['password']))) {
-        $message = 'ユーザー名、パスワードを入力してください。';
-    } else {
-        // メアドとパスワードが入力されていたらtryの処理に入る
-        try {
-            // echo '<script>alert("tryに入ったよ");</script>';
-            $dbh = db_open();
-            $sql = 'SELECT * FROM user WHERE email = :email';
-            $stmt = $dbh->prepare($sql);
-            $stmt->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
-            $stmt->execute();
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    header('Location: ./main.php');
+    exit;
+}
 
-            if (!$user) {
-                $message = 'メールアドレスが存在しません。';
-            } elseif (password_verify($_POST['password'], $user['password'])) {
-                //セッション情報を新しく生成
-                session_regenerate_id(true);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
 
-                //セッション情報を取得
-                $_SESSION['login'] = true;
+    //メアド
+    if ($email == '') {
+        $error[] = 'メールアドレスを入力してください。';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error[] = 'メールアドレスの形式が正しくありません。';
+    }
 
-                //ヘッダに表示されるヘッダ情報を取得
-                $_SESSION['user_name'] = $user['user_name'];
+    //パスワード
+    if ($password == '') {
+        $error[] = 'パスワードを入力してください。';
+    } elseif (strlen($password) < 8) {
+        $error[] = 'パスワードは８文字以上で入力してください。';
+    }
+}
+
+//バリデーション以上無し
+if (empty($error)) {
+    // $errorが空ならtryの処理に移る
+    try {
+        // echo '<script>alert("tryに入ったよ");</script>';
+        $dbh = db_open();
+        $sql = 'SELECT * FROM user WHERE email = :email';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            $error = 'メールアドレス、またはパスワードが一致しません。';
+        } elseif (password_verify($_POST['password'], $user['password'])) {
+            //セッション情報を新しく生成
+            session_regenerate_id(true);
+
+            //セッション情報を取得
+            $_SESSION['login'] = true;
+
+            //ヘッダに表示されるヘッダ情報を取得
+            $_SESSION['user_name'] = $user['user_name'];
 ?>
-                <!-- トップページに戻る -->
-                <!DOCTYPE html>
-                <html lang="ja">
+            <!-- トップページに戻る -->
+            <!DOCTYPE html>
+            <html lang="ja">
 
-                <head>
-                    <meta charset="UTF-8">
-                    <meta http-equiv="refresh" content="3; URL=./main.php">
-                    <title>ログイン完了</title>
-                </head>
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="refresh" content="3; URL=./main.php">
+                <title>ログイン完了</title>
+            </head>
 
-                <body class="text-center">
-                    <p>ログインしました。</p>
-                    <p>3秒後にTOPページへ移動します。</p>
-                    <p>自動で戻らない場合は<a href="./main.php">ここをクリック</a></p>
-                </body>
+            <body class="text-center">
+                <p>ログインしました。</p>
+                <p>3秒後にTOPページへ移動します。</p>
+                <p>自動で戻らない場合は<a href="./main.php">ここをクリック</a></p>
+            </body>
 
-                </html>
+            </html>
 <?php
-                exit;
-            } else {
-                $message = 'ユーザー名、もしくはパスワードが一致しません。';
-            }
-        } catch (PDOException $e) {
-            echo 'エラー!:' . h($e->getMessage());
             exit;
+        } else {
+            $message = 'ユーザー名、もしくはパスワードが一致しません。';
         }
+    } catch (PDOException $e) {
+        echo 'エラー!:' . h($e->getMessage());
+        exit;
     }
 }
 ?>
