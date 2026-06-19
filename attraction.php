@@ -1,6 +1,30 @@
 <?php
 $page_css = ["./css/attraction.css"];
+require_once './temp/functions.php';
 include './temp/header.php';
+
+$dbh = db_open();
+
+//BBエンジョイエリアの配列を格納
+$sql = 'SELECT * FROM atraction WHERE main_id = :main_id';
+$stmt = $dbh->prepare($sql);
+$stmt->bindValue(':main_id', 'ＢＢエンジョイエリア', PDO::PARAM_STR);
+$stmt->execute();
+$enjoy_area = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//パニックゾーンエリアの配列を格納
+$sql = 'SELECT * FROM atraction WHERE main_id = :main_id';
+$stmt = $dbh->prepare($sql);
+$stmt->bindValue(':main_id', 'パニックゾーンエリア', PDO::PARAM_STR);
+$stmt->execute();
+$panic_area = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//チアフルタウンエリアの配列を格納
+$sql = 'SELECT * FROM atraction WHERE main_id = :main_id';
+$stmt = $dbh->prepare($sql);
+$stmt->bindValue(':main_id', 'チアフル・タウンエリア', PDO::PARAM_STR);
+$stmt->execute();
+$cheerful_area = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -14,28 +38,30 @@ include './temp/header.php';
       <section class="mb-5">
         <h3 class="area-title mb-4">BBエンジョイエリア</h3>
         <div class="row">
+          <?php foreach($enjoy_area as $index => $enjoy): ?>
           <div class="col-md-6 mb-4">
             <div class="card attraction-horizontal-card shadow-sm border-0">
               <div class="row no-gutters h-100 align-items-center">
                 <div class="col-4 card-img-wrap">
                   <img
-                    src="./img/fantasy-cruise.jpg"
-                    alt="ファンタジークルーズ" />
+                    src="./img/atractions/<?= h($enjoy['atraction_image']); ?>"
+                    alt="<?= h($enjoy['atraction_name']); ?>" />
                 </div>
                 <div class="col-8">
                   <div class="card-body py-2 px-3">
                     <h4 class="card-title h6 font-weight-bold mb-1">
-                      ファンタジークルーズ
+                      <?= h($enjoy['atraction_name']); ?>
                     </h4>
                     <p class="card-text text-muted small mb-0">
-                      妖精の暮らす不思議な森をボートで探検！
+                      <?= h($enjoy['description']); ?>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6 mb-4">
+          <?php endforeach; ?>
+          <!-- <div class="col-md-6 mb-4">
             <div class="card attraction-horizontal-card shadow-sm border-0">
               <div class="row no-gutters h-100 align-items-center">
                 <div class="col-4 card-img-wrap">
@@ -97,33 +123,35 @@ include './temp/header.php';
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </section>
 
       <section class="mb-5">
         <h3 class="area-title mb-4">パニックゾーンエリア</h3>
         <div class="row">
+          <?php foreach($panic_area as $index => $panic): ?>
           <div class="col-md-6 mb-4">
             <div class="card attraction-horizontal-card shadow-sm border-0">
               <div class="row no-gutters h-100 align-items-center">
                 <div class="col-4 card-img-wrap">
-                  <img src="./img/.jpg" alt="BBコズミック" />
+                  <img src="./img/atractions/<?= h($panic['atraction_image']); ?>" alt="<?= h($panic['atraction_name']); ?>" />
                 </div>
                 <div class="col-8">
                   <div class="card-body py-2 px-3">
                     <h4 class="card-title h6 font-weight-bold mb-1">
-                      BBコズミック
+                      <?= $panic['atraction_name']; ?>
                     </h4>
                     <p class="card-text text-muted small mb-0">
-                      最大傾斜80度から急降下する超爽快コースター！
+                      <?= h($enjoy['description']); ?>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6 mb-4">
+          <?php endforeach; ?>
+          <!-- <div class="col-md-6 mb-4">
             <div class="card attraction-horizontal-card shadow-sm border-0">
               <div class="row no-gutters h-100 align-items-center">
                 <div class="col-4 card-img-wrap">
@@ -181,35 +209,37 @@ include './temp/header.php';
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </section>
 
       <section class="mb-5">
         <h3 class="area-title mb-4">チアフルタウンエリア</h3>
         <div class="row">
+          <?php foreach($cheerful_area as $index => $cheerful): ?>
           <div class="col-md-6 mb-4">
             <div class="card attraction-horizontal-card shadow-sm border-0">
               <div class="row no-gutters h-100 align-items-center">
                 <div class="col-4 card-img-wrap">
                   <img
-                    src="./img/flower-ferris-wheel.jpg"
-                    alt="フラワー大観覧車" />
+                    src="./img/atractions/<?= h($cheerful['atraction_image']); ?>"
+                    alt="<?= h($cheerful['atraction_name']); ?>" />
                 </div>
                 <div class="col-8">
                   <div class="card-body py-2 px-3">
                     <h4 class="card-title h6 font-weight-bold mb-1">
-                      フラワー大観覧車
+                      <?= h($cheerful['atraction_name']); ?>
                     </h4>
                     <p class="card-text text-muted small mb-0">
-                      パーク全体と海が一望できる大パノラマ。
+                      <?= h($cheerful['description']); ?>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6 mb-4">
+          <?php endforeach; ?>
+          <!-- <div class="col-md-6 mb-4">
             <div class="card attraction-horizontal-card shadow-sm border-0">
               <div class="row no-gutters h-100 align-items-center">
                 <div class="col-4 card-img-wrap">
@@ -271,7 +301,7 @@ include './temp/header.php';
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </section>
 

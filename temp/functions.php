@@ -8,8 +8,8 @@ function h(string $str): string
 //PDO接続のメソッド
 function db_open()
 {
-    $user = "phpuser";
-    $password = "phpuser";
+    $user = "root";
+    $password = "";
     $opt = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_EMULATE_PREPARES => false,
