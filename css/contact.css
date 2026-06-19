@@ -1,0 +1,135 @@
+@charset "utf-8";
+
+/* ==========================================
+   お問い合わせ画面（contact.php）レイアウト設定
+   ========================================== */
+
+/* 1. 全体の囲み・中央寄せ */
+article {
+  max-width: 650px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+}
+
+/* タイトルヘッダー */
+article h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff7675; /* BBlandメインピンク */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* 2. フォームを包む白いボックス */
+.contents {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* 「こちらから」の導入テキスト */
+.contents > p:first-of-type {
+  font-size: 1rem;
+  color: #57606f;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+/* 3. 各入力項目（pタグ）のレイアウト */
+.contents form p {
+  margin: 0 0 20px 0; /* 下項目との余白 */
+}
+.contents form p:last-child {
+  margin-bottom: 0; /* 最後の項目は余白なし */
+}
+
+/* ラベル（項目名）のスタイル */
+.contents form label {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #2f3542;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+/* 4. 入力フォーム（input / textarea）の共通デザイン */
+.contents form input[type="text"],
+.contents form input[type="email"],
+.contents form input[type="tel"],
+.contents form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #dfe4ea;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  color: #2f3542;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* 横幅のハミ出し防止 */
+}
+
+/* プレースホルダー（うっすら見えるヒント文字）の色 */
+.contents form input::placeholder,
+.contents form textarea::placeholder {
+  color: #a4b0be;
+  font-size: 0.9rem;
+}
+
+/* フォーカス時（入力中の青枠や背景色の変化） */
+.contents form input:focus,
+.contents form textarea:focus {
+  outline: none;
+  border-color: #ff7675; /* 入力中はピンクの枠線に */
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 118, 117, 0.15);
+}
+
+/* テキストエリア（問合せ内容）の固有設定 */
+.contents form textarea {
+  resize: vertical; /* 縦方向のみ自由に引き伸ばせるように */
+  min-height: 120px;
+}
+
+/* 5. 送信ボタン（formの外側にあるpタグ）のスタイル */
+article > p:last-of-type {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+article input[type="submit"] {
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 14px 60px;
+  border-radius: 30px;
+  border: none;
+  background-color: #ff7675; /* 主役ピンク */
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(255, 118, 117, 0.3);
+  transition: all 0.2s ease;
+}
+
+/* 送信ボタンのホバーエフェクト */
+article input[type="submit"]:hover {
+  background-color: #e84118; /* 濃い赤ピンクに変化 */
+  transform: translateY(-2px); /* 少し上に浮き上がる */
+  box-shadow: 0 6px 15px rgba(255, 118, 117, 0.4);
+}
+
+/* 📱 スマホ表示のときの微調整 */
+@media (max-width: 576px) {
+  .contents {
+    padding: 20px;
+  }
+  article h1 {
+    font-size: 1.5rem;
+  }
+  article input[type="submit"] {
+    width: 100%; /* スマホではボタンを画面いっぱいに広げる */
+    padding: 14px 0;
+  }
+}

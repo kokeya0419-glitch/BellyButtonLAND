@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+/* ==========================================
+   ログアウト画面（logout.php）レイアウト設定
+   ========================================== */
+
+/* 1. 画面全体の中央配置設定 */
+body.text-center {
+  display: block; /* 念のためブロック要素として初期化 */
+  max-width: 550px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* 2. メッセージを包むカード風のボックス */
+body.text-center > p {
+  margin: 0;
+  padding: 0;
+}
+
+/* メッセージ全体を囲うように、擬似的なカード状の見た目を作ります */
+body.text-center {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 45px 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f2f6;
+}
+
+/* 3. 各テキスト行（pタグ）の強弱・スタイル調整 */
+
+/* 「ログアウトしました。」（1行目のメッセージ） */
+body.text-center p:nth-of-type(1) {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2f3542; /* 深いグレー */
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* チェックマークやアイコンの代わりに、BBlandらしい遊び心を少しプラス */
+body.text-center p:nth-of-type(1)::before {
+  content: "✨";
+  margin-right: 5px;
+}
+body.text-center p:nth-of-type(1)::after {
+  content: "✨";
+  margin-left: 5px;
+}
+
+/* 「3秒後にTOPページへ移動します。」（2行目のメッセージ） */
+body.text-center p:nth-of-type(2) {
+  font-size: 1.05rem;
+  color: #57606f; /* 中間グレー */
+  margin-bottom: 30px;
+}
+
+/* 「自動で戻らない場合はここをクリック」（3行目のメッセージ） */
+body.text-center p:nth-of-type(3) {
+  font-size: 0.9rem;
+  color: #a4b0be; /* 薄いグレー */
+  border-top: 1px dashed #dfe4ea; /* 区切り線 */
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+/* 4. 手動リンクボタンの装飾 */
+body.text-center p:nth-of-type(3) a {
+  color: #ff7675; /* BBlandメインピンク */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: #fff5f5; /* ほんのり薄ピンクの背景 */
+  transition: all 0.2s ease;
+  display: inline-block;
+  margin: 0 4px;
+}
+
+/* リンクホバー時のエフェクト */
+body.text-center p:nth-of-type(3) a:hover {
+  color: #ffffff;
+  background-color: #ff7675; /* ピンク背景に反転 */
+  box-shadow: 0 4px 10px rgba(255, 118, 117, 0.2);
+}
+
+/* 📱 スマホ表示のときの微調整 */
+@media (max-width: 576px) {
+  body.text-center {
+    margin: 40px 15px;
+    padding: 35px 20px;
+  }
+  body.text-center p:nth-of-type(1) {
+    font-size: 1.3rem;
+  }
+}

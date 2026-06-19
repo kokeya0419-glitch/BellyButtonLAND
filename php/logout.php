@@ -16,7 +16,7 @@ session_destroy();
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="3; URL=../main.php">
+    <!-- <meta http-equiv="refresh" content="3; URL=../main.php"> -->
     <title>ログアウト</title>
 </head>
 

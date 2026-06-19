@@ -1,0 +1,195 @@
+@charset "utf-8";
+
+/* ==========================================
+   会員登録・確認画面レイアウト設定
+   ========================================== */
+
+/* 1. 記事全体の囲み・中央寄せ */
+article {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+}
+
+article h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff7675; /* BBlandテーマピンク */
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* 2. パンくずリストのスタイル */
+#breadcrumb {
+  max-width: 700px;
+  margin: 20px auto 0;
+  padding: 0 20px;
+}
+#breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  font-size: 0.85rem;
+}
+#breadcrumb li {
+  color: #747d8c;
+}
+#breadcrumb li a {
+  color: #ff7675;
+  text-decoration: none;
+}
+#breadcrumb li:not(:last-child)::after {
+  content: ">";
+  margin: 0 10px;
+  color: #a4b0be;
+}
+
+/* 3. エラーメッセージ表示エリア */
+.error {
+  background-color: #ffeaa7;
+  border: 1px solid #ffcc00;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+.error ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #d63031;
+  font-weight: bold;
+}
+.error li {
+  margin-bottom: 5px;
+}
+.error li:last-child {
+  margin-bottom: 0;
+}
+
+/* 4. 確認画面のメインコンテンツ */
+.contents {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.contents > p {
+  font-weight: bold;
+  color: #2f3542;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.05rem;
+}
+
+/* 5. 💡 現在のHTML構造（ばらばらのh2とp）を綺麗に並べるFlexboxマジック */
+.formFlex {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 各項目の縦の隙間 */
+}
+
+/* お名前だけ囲まれている .label への対応 */
+.formFlex .label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px dashed #dfe4ea;
+  padding-bottom: 15px;
+}
+.formFlex .label h2,
+.formFlex .label p {
+  margin: 0;
+  padding: 0;
+}
+
+/* その他の囲まれていない h2 と p のデザイン調整 */
+.formFlex > h2 {
+  font-size: 1rem;
+  color: #57606f;
+  margin: 15px 0 0 0;
+  padding: 0;
+}
+/* お名前のh2とその他のh2のスタイルを統一 */
+.formFlex .label h2,
+.formFlex > h2 {
+  font-size: 1rem;
+  color: #57606f;
+  font-weight: bold;
+}
+
+.formFlex > p {
+  margin: 0;
+  padding: 0 0 15px 0;
+  font-size: 1.1rem;
+  color: #2f3542;
+  font-weight: 500;
+  border-bottom: 1px dashed #dfe4ea; /* 項目ごとの区切り線 */
+}
+
+/* 6. ボタンエリア（最後のpタグ）のレイアウト上書き */
+/* 区切り線を消して、ボタンを中央に横並びにする */
+.formFlex > p:last-child,
+.text-center {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  border-bottom: none;
+  padding: 20px 0 0 0;
+  margin: 0;
+  text-align: center;
+}
+
+/* 7. ボタンの共通デザイン（BBlandの世界観にマッチ） */
+.formFlex input[type="submit"],
+.formFlex button,
+.text-center button {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 12px 35px;
+  border-radius: 30px;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+/* 登録する（送信）ボタン */
+.formFlex input[type="submit"] {
+  background-color: #ff7675; /* 主役ピンク */
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(255, 118, 117, 0.3);
+}
+.formFlex input[type="submit"]:hover {
+  background-color: #e84118;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 118, 117, 0.4);
+}
+
+/* 修正する（戻る）ボタン */
+.formFlex button,
+.text-center button {
+  background-color: #f1f2f6; /* ライトグレー */
+  color: #57606f;
+}
+.formFlex button:hover,
+.text-center button:hover {
+  background-color: #dfe4ea;
+  color: #2f3542;
+}
+
+/* 📱 スマホ表示のときの微調整 */
+@media (max-width: 576px) {
+  .contents {
+    padding: 20px;
+  }
+  .formFlex > p:last-child {
+    flex-direction: column; /* スマホではボタンを縦並びに */
+    gap: 10px;
+  }
+  .formFlex input[type="submit"],
+  .formFlex button {
+    width: 100%;
+  }
+}

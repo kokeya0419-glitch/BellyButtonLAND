@@ -1,6 +1,6 @@
 <?php
-require_once 'php/functions.php';
-include 'php/header.php';
+require_once './temp/functions.php';
+include './temp/header.php';
 
 //保存ファイル名の指定
 $fileName = 'contact.txt';
@@ -13,20 +13,21 @@ flock($file, LOCK_EX);
 
 //データの取得
 $date = [
-    $_POST['name'],
-    $_POST['email'],
+    $_POST['custemer_name'],
+    $_POST['custemer_email'],
     $_POST['tel'],
-    $_POST['comment']
+    $_POST['subject'],
+    $_POST['message']
 ];
 
 //ファイルの書き込み
-foreach($date as $d){
-    fputs($file, $d, '\n');
+foreach ($date as $d) {
+    fputs($file, $d . "\n");
 }
-fputs($file, '----------\n');
+fputs($file, "----------\n");
 
 //ファイルアンロック
-flock($file,LOCK_UN);
+flock($file, LOCK_UN);
 
 //ファイルクローズ
 fclose($file);
@@ -34,7 +35,7 @@ fclose($file);
 
 <div id="breadcrumb">
     <ol>
-        <li><a href="index.php">ホーム</a></li>
+        <li><a href="main.php">ホーム</a></li>
         <li>送信完了</li>
     </ol>
 </div>
@@ -46,4 +47,5 @@ fclose($file);
 </article>
 
 <?php
-include 'php/footer.php';
+include './temp/footer1.php';
+include './temp/footer2.php';

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '/functions.php';
 ?>
 
 <!doctype html>
@@ -16,14 +17,22 @@ session_start();
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- 選択したcssが表示される -->
+  <?php if (!empty($page_css)) : ?>
+    <?php foreach ($page_css as $css): ?>
+      <link rel="stylesheet" href="<?= h($css) ?>">
+    <?php endforeach; ?>
+
+  <?php endif; ?>
   <!-- ログインcss -->
-  <link rel="stylesheet" href="./css/login.css">
+  <!-- <link rel="stylesheet" href="./css/login.css"> -->
   <!-- アトラクションcss -->
-  <link rel="stylesheet" href="./css/attraction.css">
+  <!-- <link rel="stylesheet" href="./css/attraction.css"> -->
   <!-- グッズcss -->
-  <link rel="stylesheet" href="./css/guzz.css">
+  <!-- <link rel="stylesheet" href="./css/guzz.css"> -->
   <!-- フードcss -->
-  <link rel="stylesheet" href="./css/food.css">
+  <!-- <link rel="stylesheet" href="./css/food.css"> -->
 
 </head>
 
@@ -60,12 +69,12 @@ session_start();
           <a class="nav-link" href="./food.php">フード＆カフェ</a>
         </li>
         <li class="nav-item"><a class="nav-link" href="./event.html">イベント</a></li>
-        <li class="nav-item"><a class="nav-link" href="./contact.html">問合せ</a></li>
+        <li class="nav-item"><a class="nav-link" href="./contact.php">問合せ</a></li>
 
         <!-- ログイン状態に応じてログインかログアウトか変わる -->
         <?php if (!empty($_SESSION['login'])) : ?>
           <li class="nav-item ml-lg-4 w-100-sm">
-            <a class="nav-link nav-login" href="php/logout.php">👴 ログアウト</a>
+            <a class="nav-link nav-login" href="./logout.php">👴 ログアウト</a>
           </li>
         <?php else : ?>
           <li class="nav-item ml-lg-4 w-100-sm">

@@ -1,4 +1,5 @@
 <?php
+$page_css = ["./css/guzz.css"];
 include './temp/header.php';
 
 ?>

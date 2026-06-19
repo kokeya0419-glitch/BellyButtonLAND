@@ -1,51 +1,19 @@
 <?php
+$page_css = ["./css/food.css"];
+require_once './temp/functions.php';
 include './temp/header.php';
+
+//foodテーブルの配列の取得
+$dbh = db_open();
+$sql = 'SELECT * FROM foods';
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$limitedFoodNum = [3, 6, 13, 14, 18];
+$rad = rand(0, 4);
+$limitedFood = $foods[$limitedFoodNum[$rad]];
+
 ?>
-<!-- 
-<!doctype html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>フード＆カフェ紹介 | BBland</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="food.css" />
-</head>
-
-<body>
-    <header id="top" class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm py-2 px-4">
-        <div class="header-left d-flex align-items-center">
-            <h1 class="logo mb-0 mr-3">
-                <a href="index.html"><img src="./img/logo2.png" alt="BBlandロゴ" /></a>
-            </h1>
-            <h2 class="bb-welcome mb-0 d-none d-md-block">ようこそBBランドへ</h2>
-        </div>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <nav class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav mt-3 mt-lg-0">
-                <li class="nav-item"><a class="nav-link" href="attractions.html">アトラクション</a></li>
-                <li class="nav-item"><a class="nav-link" href="items.html">グッズ</a></li>
-                <li class="nav-item"><a class="nav-link active" href="food.html">フード＆カフェ</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.html#events">イベント</a></li>
-                <li class="nav-item"><a class="nav-link" href="#footer-info">問合せ</a></li>
-                <li class="nav-item ml-lg-4 w-100-sm"><a class="nav-link nav-login" href="">👤 ログイン</a></li>
-                <li class="nav-item ml-lg-2 w-100-sm">
-                    <a class="nav-link nav-cart" href="">
-                        🛒 カート <span class="badge badge-pill badge-light ml-1">0</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header> -->
 
 <main class="container mb-5 food-main-container">
 
@@ -62,30 +30,32 @@ include './temp/header.php';
                     限定フード・ドリンク
                 </h3>
                 <div class="row">
-                    <div class="col-md-4 col-6 mb-4">
-                        <div class="card h-100 border-0 shadow-sm p-3 item-food-card">
-                            <img src="./img/food1.jpg" alt="商品画像" class="img-circle" />
-                            <h4 class="h6 font-weight-bold mb-1 text-center">BBランド特製チュロス</h4>
-                            <p class="text-muted small mb-2 text-center">星形でサクサク！限定シナモン味</p>
-                            <p class="font-weight-bold mb-0 text-orange mt-auto text-center">¥550</p>
+                    <?php foreach ($limitedFood as $index => $limitedFoods): ?>    
+                        <div class="col-md-4 col-6 mb-4">
+                            <div class="card h-100 border-0 shadow-sm p-3 item-food-card">
+                                <img src="./img/foods/<?= h($limitedFoods['food_image']); ?>" alt="<?= h($limitedFoods['food_name']) ?>" class="img-circle" />
+                                <h4 class="h6 font-weight-bold mb-1 text-center"><?= h($limitedFoods['food_name']); ?></h4>
+                                <p class="text-muted small mb-2 text-center"><?= h($limitedFoods['description']); ?></p>
+                                <p class="font-weight-bold mb-0 text-orange mt-auto text-center"><?= h($limitedFoods['food_price']); ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-6 mb-4">
-                        <div class="card h-100 border-0 shadow-sm p-3 item-food-card">
-                            <img src="./img/food2.jpg" alt="商品画像" class="img-circle" />
-                            <h4 class="h6 font-weight-bold mb-1 text-center">アニバーサリーパフェ</h4>
-                            <p class="text-muted small mb-2 text-center">カラフルで写真映え抜群のスイーツ</p>
-                            <p class="font-weight-bold mb-0 text-orange mt-auto text-center">¥980</p>
+                        <?php endforeach; ?>
+                        <div class="col-md-4 col-6 mb-4">
+                            <div class="card h-100 border-0 shadow-sm p-3 item-food-card">
+                                <img src="./img/foods/<?= $foods['food_image'] ?>" alt="<?= $foods['food_name'] ?>" class="img-circle" />
+                                <h4 class="h6 font-weight-bold mb-1 text-center"><?= $foods['food_image'] ?></h4>
+                                <p class="text-muted small mb-2 text-center"><?= $foods['description'] ?></p>
+                                <p class="font-weight-bold mb-0 text-orange mt-auto text-center">¥<?= $foods['food_price'] ?> ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-6 mb-4">
-                        <div class="card h-100 border-0 shadow-sm p-3 item-food-card">
-                            <img src="./img/food3.jpg" alt="商品画像" class="img-circle" />
-                            <h4 class="h6 font-weight-bold mb-1 text-center">キャラクターラテ</h4>
-                            <p class="text-muted small mb-2 text-center">可愛いラテアートが選べます</p>
-                            <p class="font-weight-bold mb-0 text-orange mt-auto text-center">¥650</p>
+                        <div class="col-md-4 col-6 mb-4">
+                            <div class="card h-100 border-0 shadow-sm p-3 item-food-card">
+                                <img src="./img/food3.jpg" alt="商品画像" class="img-circle" />
+                                <h4 class="h6 font-weight-bold mb-1 text-center">キャラクターラテ</h4>
+                                <p class="text-muted small mb-2 text-center">可愛いラテアートが選べます</p>
+                                <p class="font-weight-bold mb-0 text-orange mt-auto text-center">¥650</p>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
 

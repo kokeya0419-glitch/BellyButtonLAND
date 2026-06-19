@@ -1,4 +1,5 @@
 <?php
+$page_css = ["./css/login.css"];
 require_once './temp/functions.php';
 include './temp/header.php';
 

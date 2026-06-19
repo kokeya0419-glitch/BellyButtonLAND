@@ -1,4 +1,5 @@
 <?php
+$page_css = ["./css/attraction.css"];
 include './temp/header.php';
 
 ?>
@@ -397,5 +398,3 @@ include './temp/header.php';
 </body>
 
 </html>
-
-
