@@ -35,9 +35,7 @@ $screaming_number = [0, 5, 6, 7];
 $random  = rand(0, 3);
 $atraction_screaming = $atraction_ranking[$screaming_number[$random]];
 
-echo $screaming_number[$random];
-
-
+// echo $screaming_number[$random];
 
 ?>
 
@@ -58,7 +56,7 @@ echo $screaming_number[$random];
     <div class="row">
       <?php foreach ($goods_ranking as $index => $goods): ?>
         <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card item-card h-100 border-0 shadow-sm">
+          <div class="card item-card h-100 border-0 shadow-sm position-relative">
             <div class="item-img-box">
               <img
                 src="./img/goods/<?= h($goods['goods_image']) ?>.png"
@@ -74,7 +72,10 @@ echo $screaming_number[$random];
                 class="card-text item-price mt-auto fs-5 text-danger fw-bold">
                 <?= number_format(h($goods['goods_price'])) ?> <span class="tax-in text-muted fs-6">(税込)</span>
               </p>
-              <a href="#online-shop" class="btn btn-add-cart w-100 mt-3">🛒 オンラインで購入</a>
+
+              <a href="goodsdetail.php?goods_id=<?= h($goods['goods_id'] ?? $index) ?>" class="btn btn-add-cart w-100 mt-3 stretched-link">
+                🛒 オンラインで購入
+              </a>
             </div>
           </div>
         </div>
@@ -90,7 +91,6 @@ echo $screaming_number[$random];
     </div>
   </section>
 
-
   <!--------------------アトラクション紹介-----------------
 --------------------------------------------------------->
   <section id="attractions" class="py-5">
@@ -103,7 +103,7 @@ echo $screaming_number[$random];
 
     <div class="row">
       <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card item-card h-100 border-0 shadow-sm">
+        <div class="card item-card h-100 border-0 shadow-sm position-relative">
           <div class="item-img-box">
             <img
               src="./img/atractions/<?= $atraction_spin['atraction_image'] ?>"
@@ -113,7 +113,9 @@ echo $screaming_number[$random];
           </div>
           <div class="card-body d-flex flex-column">
             <h3 class="card-title item-name fs-5 fw-bold">
-              <?= $atraction_spin['atraction_name'] ?>
+              <a href="atraction_detail.php?id=<?= $atraction_spin['atraction_id'] ?>" class="text-decoration-none text-dark stretched-link">
+                <?= $atraction_spin['atraction_name'] ?>
+              </a>
             </h3>
             <p class="card-text text-muted small mt-2">
               <?= $atraction_spin['description'] ?>
@@ -126,7 +128,7 @@ echo $screaming_number[$random];
       </div>
 
       <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card item-card h-100 border-0 shadow-sm">
+        <div class="card item-card h-100 border-0 shadow-sm position-relative">
           <div class="item-img-box">
             <img
               src="./img/atractions/<?= $atraction_family['atraction_image'] ?>"
@@ -136,7 +138,9 @@ echo $screaming_number[$random];
           </div>
           <div class="card-body d-flex flex-column">
             <h3 class="card-title item-name fs-5 fw-bold">
-              <?= $atraction_family['atraction_name'] ?>
+              <a href="atraction_detail.php?id=<?= $atraction_family['atraction_id'] ?>" class="text-decoration-none text-dark stretched-link">
+                <?= $atraction_family['atraction_name'] ?>
+              </a>
             </h3>
             <p class="card-text text-muted small mt-2">
               <?= $atraction_family['description'] ?>
@@ -149,7 +153,7 @@ echo $screaming_number[$random];
       </div>
 
       <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card item-card h-100 border-0 shadow-sm">
+        <div class="card item-card h-100 border-0 shadow-sm position-relative">
           <div class="item-img-box">
             <img
               src="./img/atractions/<?= $atraction_screaming['atraction_image'] ?>"
@@ -159,7 +163,9 @@ echo $screaming_number[$random];
           </div>
           <div class="card-body d-flex flex-column">
             <h3 class="card-title item-name fs-5 fw-bold">
-              <?= $atraction_screaming['atraction_name'] ?>
+              <a href="atraction_detail.php?id=<?= $atraction_screaming['atraction_id'] ?>" class="text-decoration-none text-dark stretched-link">
+                <?= $atraction_screaming['atraction_name'] ?>
+              </a>
             </h3>
             <p class="card-text text-muted small mt-2">
               <?= $atraction_screaming['description'] ?>
@@ -193,7 +199,7 @@ echo $screaming_number[$random];
     </div>
     <div class="row">
       <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card item-card h-100 border-0 shadow-sm">
+        <div class="card item-card h-100 border-0 shadow-sm position-relative">
           <div class="item-img-box">
             <img
               src="./img/event1.jpg"
@@ -204,7 +210,9 @@ echo $screaming_number[$random];
           <div class="card-body d-flex flex-column">
             <span class="text-muted small mb-1">📅 2026年7月1日 〜 8月31日</span>
             <h3 class="card-title item-name fs-5 fw-bold">
-              びしょ濡れ！サマーウォーターフェス2026
+              <a href="event_detail.php?id=1" class="text-decoration-none text-dark stretched-link">
+                びしょ濡れ！サマーウォーターフェス2026
+              </a>
             </h3>
             <p class="card-text text-muted small mt-2">
               大量の水が降り注ぐ、夏限定の大迫力ステージショー！家族みんなで思いっきり濡れて涼もう！
@@ -212,8 +220,9 @@ echo $screaming_number[$random];
           </div>
         </div>
       </div>
+
       <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card item-card h-100 border-0 shadow-sm">
+        <div class="card item-card h-100 border-0 shadow-sm position-relative">
           <div class="item-img-box">
             <img
               src="./img/event1.jpg"
@@ -224,7 +233,9 @@ echo $screaming_number[$random];
           <div class="card-body d-flex flex-column">
             <span class="text-muted small mb-1">📅 2026年7月1日 〜 8月31日</span>
             <h3 class="card-title item-name fs-5 fw-bold">
-              びしょ濡れ！サマーウォーターフェス2026
+              <a href="event_detail.php?id=2" class="text-decoration-none text-dark stretched-link">
+                びしょ濡れ！サマーウォーターフェス2026
+              </a>
             </h3>
             <p class="card-text text-muted small mt-2">
               大量の水が降り注ぐ、夏限定の大迫力ステージショー！家族みんなで思いっきり濡れて涼もう！
@@ -232,8 +243,9 @@ echo $screaming_number[$random];
           </div>
         </div>
       </div>
+
       <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card item-card h-100 border-0 shadow-sm">
+        <div class="card item-card h-100 border-0 shadow-sm position-relative">
           <div class="item-img-box">
             <img
               src="./img/event1.jpg"
@@ -244,7 +256,9 @@ echo $screaming_number[$random];
           <div class="card-body d-flex flex-column">
             <span class="text-muted small mb-1">📅 2026年7月1日 〜 8月31日</span>
             <h3 class="card-title item-name fs-5 fw-bold">
-              びしょ濡れ！サマーウォーターフェス2026
+              <a href="event_detail.php?id=3" class="text-decoration-none text-dark stretched-link">
+                びしょ濡れ！サマーウォーターフェス2026
+              </a>
             </h3>
             <p class="card-text text-muted small mt-2">
               大量の水が降り注ぐ、夏限定の大迫力ステージショー！家族みんなで思いっきり濡れて涼もう！

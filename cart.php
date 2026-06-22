@@ -1,25 +1,18 @@
 <?php
 require_once './temp/functions.php';
-include './temp/header.php';
+
+// ここでセッション開始
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $user_name = $_SESSION['user_name'] ?? 'ゲスト';
 
-//商品IDチェック
-if (!empty($_POST['goods_id'])) {
-    $goods_id = (int)$_POST['goods_id'];
-    if (!preg_match('/\A\d{0,11}\z/u', $goods_id)) {
-        echo '該当商品はありません。';
-        exit;
-    }
-}
-
-//カート処理用配列 null合体演算子
-//$_SESSIOM['cart']が存在していてnullでなければ、その値を使い「存在しない・nullなら」[ ]空の配列を代入
-//カート内に商品があればカート処理用配列$cartItemに代入
+// カート取得
 $cartItem = $_SESSION['cart'] ?? [];
 
-//商品追加処理
-if (isset($_POST['goods_id']) && isset($_POST['quantity'])) {
+// 商品追加処理
+if (isset($_POST['goods_id'], $_POST['quantity'])) {
     $goods_id = filter_input(INPUT_POST, 'goods_id', FILTER_VALIDATE_INT);
     $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
 
@@ -44,19 +37,30 @@ if (isset($_POST['goods_id']) && isset($_POST['quantity'])) {
             'quantity' => $quantity
         ];
     }
+
+    $_SESSION['cart'] = $cartItem;
+
+    // ここでリダイレクト
+    header('Location: cart.php');
+    exit;
 }
-//商品削除処理
+
+// 商品削除処理
 if (isset($_POST['delld'])) {
     $index = filter_input(INPUT_POST, 'delld', FILTER_VALIDATE_INT);
 
     if ($index !== false && $index !== null && isset($cartItem[$index])) {
         unset($cartItem[$index]);
         $cartItem = array_values($cartItem);
+        $_SESSION['cart'] = $cartItem;
     }
+
+    header('Location: cart.php');
+    exit;
 }
 
-//セッションに格納
-$_SESSION['cart'] = $cartItem;
+// ここでheaderを読み込まないとカートに追加処理するのがワンテンポ遅れる
+include './temp/header.php';
 
 //商品情報の取得
 $cartItems = [];
@@ -144,14 +148,14 @@ $totalAmountTax = 0;
                     }
 
                     //合計金額計算
-                    $price = (int)$cartItems[$goods_id]['price'];
+                    $price = (int)$cartItems[$goods_id]['goods_price'];
                     $taxPrice = (int)($price * (1 + $taxRate));
                     $subtotal = $taxPrice * $quantity;
                 ?>
 
                     <tr>
                         <td>
-                            <h3><a href="item.php?id=<?= $goods_id ?>"><?= h($cartItems[$goods_id]['productName']) ?></a></h3>
+                            <h3><a href="item.php?id=<?= $goods_id ?>"><?= h($cartItems[$goods_id]['goods_name']) ?></a></h3>
                         </td>
                         <td>
                             <p class="price"><?= number_format($taxPrice) . '<span>円(税込)</span>' ?></p>
@@ -194,17 +198,15 @@ $totalAmountTax = 0;
     ?>
 
     <!-- //金額表示 -->
-    <div class="container">
+    <!-- <div class="container">
         <h2 class="text-center"><?= $user_name ?>さんのお買い物合計</h2>
         <p class="text-center">お買い物合計金額 = <?= number_format($totalAmount) . '円' ?></p>
         <p class="text-center">消費税(10%) = <?= number_format($totalTax) . '円' ?></p>
-        <p class="text-center">お買い物金額(税込) = <?= number_format($totalAmountTax) . '円' ?></p>
+        <p class="text-center">お買い物金額(税込) = <?= number_format($totalAmountTax) . '円' ?></p> -->
         <p class="text-center"><button onclick="location.href='./guzz.php'" class="returnShopping">買い物を続ける</button></p>
-        <p class="text-center"><button onclick="location.href='payment.php'" class="payment">決済画面へ</button></p>
+        <p class="text-center"><button onclick="location.href='confirmOrder.php'" class="payment">購入商品の確認画面へ</button></p>
     </div>
 </article>
-
-カートのページです～
 
 <?php
 include './temp/footer1.php';

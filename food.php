@@ -58,7 +58,7 @@ foreach([7,8,9,16,17,18] as $id){
                     限定フード・ドリンク
                 </h3>
                 <div class="row">
-                    <!-- 配列をforeachで回す -->
+                    <!-- 配列をforeachで回す、各コンテンツ同じ処理を行う -->
                     <?php foreach ($limitedFoods as $foods): ?>
                         <div class="col-md-4 col-6 mb-4">
                             <div class="card h-100 border-0 shadow-sm p-3 item-food-card">

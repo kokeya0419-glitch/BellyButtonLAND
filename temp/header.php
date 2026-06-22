@@ -1,6 +1,9 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/functions.php';
+$cartCount = count($_SESSION['cart'] ?? []);
 ?>
 
 <!doctype html>
@@ -17,6 +20,7 @@ require_once __DIR__ . '/functions.php';
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./css/bgm.css" />
 
   <!-- 選択したcssが表示される -->
   <?php if (!empty($page_css)) : ?>
@@ -71,10 +75,13 @@ require_once __DIR__ . '/functions.php';
         <li class="nav-item"><a class="nav-link" href="./event.html">イベント</a></li>
         <li class="nav-item"><a class="nav-link" href="./contact.php">問合せ</a></li>
 
+        <li class="nav-item ml-lg-4 w-100-sm">
+            <a class="nav-link nav-login" href="./mypage.php"><?php echo h($_SESSION['user_name']?? 'ゲスト'); ?>さん</a>
+          </li>
         <!-- ログイン状態に応じてログインかログアウトか変わる -->
         <?php if (!empty($_SESSION['login'])) : ?>
           <li class="nav-item ml-lg-4 w-100-sm">
-            <a class="nav-link nav-login" href="./logout.php">👴 ログアウト</a>
+            <a class="nav-link nav-login" href="./logout.php">ログアウト</a>
           </li>
         <?php else : ?>
           <li class="nav-item ml-lg-4 w-100-sm">
@@ -84,7 +91,7 @@ require_once __DIR__ . '/functions.php';
 
         <li class="nav-item ml-lg-2 w-100-sm">
           <a class="nav-link nav-cart" href="./cart.php">
-            🛒 カート <span class="badge badge-pill badge-light ml-1">4</span>
+            🛒 カート <span class="badge badge-pill badge-light ml-1"><?= h($cartCount) ?></span>
           </a>
         </li>
       </ul>

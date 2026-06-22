@@ -52,7 +52,10 @@ include 'temp/header.php';
                 <div class="field">
                     <p><input type="tel" name="tel" id="tel"></p>
                 </div>
-                <p class="text-center"><button type="submit">会員登録する</button></p>
+                <div class="label">
+                    <label>決済認証コード</label>
+                    <input type="password" name="pinCode" maxlength="4" minlength="4" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{4}$" title="4文字の半角英数字で、大文字・小文字・数字をそれぞれ1文字以上含めてください">
+                    <p class="text-center"><button type="submit">会員登録する</button></p>
         </form>
     </div>
 </article>

@@ -36,4 +36,9 @@ require_once './temp/functions.php';
 
 <?php
 include './temp/footer1.php';
-include './temp/footer.php';
+?>
+
+
+<?php
+include './temp/footer2.php';
+?>

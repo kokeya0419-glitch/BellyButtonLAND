@@ -1,6 +1,7 @@
 /* ==========================================
    1. 全体設定
    ========================================== */
+
 body {
   font-family:
     'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
@@ -8,14 +9,19 @@ body {
   color: #333;
   background-color: #fcfaf7;
 
-  /* 💡 通常時のヘッダー（ロゴ150px＋上下余白）がメイン動画を隠さないための最適な余白 */
+  /* 💡 初期状態では transition を外すことで、読み込み時の一瞬の崩れを完全に防止 */
   padding-top: 190px;
+}
+
+/* 💡 スクロールしてヘッダーが縮む「変化の瞬間」だけ、bodyにアニメーションを効かせる */
+body:has(#top.is-scrolled) {
+  padding-top: 100px;
   transition: padding 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* 💡 スクロールしてヘッダーが縮んだら、bodyの余白もピタッと連動して狭くする */
-body:has(#top.is-scrolled) {
-  padding-top: 100px;
+/* 💡 スクロールが上に戻ってヘッダーが元のサイズに広がる「変化の瞬間」にもアニメーションを効かせる */
+body:not(:has(#top.is-scrolled)) {
+  transition: padding 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* ==========================================
@@ -317,7 +323,16 @@ body:has(#top.is-scrolled) {
   background-color: #ff7675; /* ホバーで色が反転！ */
   color: #ffffff !important;
 }
+/* 商品カード全体をホバーしたときのアニメーション */
+.item-card {
+  cursor: pointer; /* カーソルを指マークにする */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.item-card:hover {
+  transform: translateY(-5px); /* カードを5px上に持ち上げる */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important; /* 影を少し強くして立体感を出す */
+}
 /* ==========================================
    9. フッターセクション
    ========================================== */

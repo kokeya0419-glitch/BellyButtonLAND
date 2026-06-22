@@ -1,0 +1,39 @@
+/* 右上のBGMボタン */
+#bgmBtn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100000;
+    padding: 10px 18px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.popup{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:99999;
+}
+
+.popup-content{
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    width:320px;
+}
+
+.popup-content button{
+    margin:10px;
+    padding:10px 20px;
+}

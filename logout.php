@@ -27,7 +27,7 @@ session_destroy();
 <body class="text-center">
     <p>ログアウトしました。</p>
     <p>3秒後にTOPページへ移動します。</p>
-    <p>自動で戻らない場合は<a href="../main.php">ここをクリック</a></p>
+    <p>自動で戻らない場合は<a href="./main.php">ここをクリック</a></p>
 </body>
 
 

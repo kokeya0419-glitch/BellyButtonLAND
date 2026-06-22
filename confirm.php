@@ -12,6 +12,7 @@ $password = trim($_POST['password'] ?? '');
 $post_code = trim($_POST['post_code'] ?? '');
 $address = trim($_POST['address'] ?? '');
 $tel = trim($_POST['tel'] ?? '');
+$pinCode = trim($_POST['pinCode'] ?? '');
 
 //名前
 if($user_name === ''){
@@ -52,6 +53,7 @@ if ($tel == ''){
 } elseif(!preg_match('/^\d{10,11}$/', str_replace('-', '', $tel))){
     $error[] = '電話番号は10桁、または11桁で入力してください。';
 }
+
 
 ?>
 
@@ -117,6 +119,11 @@ if ($tel == ''){
                 <p>
                     <?= h($tel); ?>
                     <input type="hidden" name="tel" value="<?= h($tel); ?>">
+                </p>
+                <h2>pinコード</h2>
+                <p>
+                    <?= h($pinCode); ?>
+                    <input type="hidden" name="pinCode" value="<?= h($pinCode); ?>">
                 </p>
                 <p>
                     <input type="submit" value="登録する">

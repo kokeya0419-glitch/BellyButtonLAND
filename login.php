@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-//バリデーション以上無し
+//バリデーション異常無しの場合
 if (empty($error)) {
     // $errorが空ならtryの処理に移る
     try {
@@ -55,6 +55,9 @@ if (empty($error)) {
 
             //ヘッダに表示されるヘッダ情報を取得
             $_SESSION['user_name'] = $user['user_name'];
+
+            //ユーザーIDの情報を取得
+            $_SESSION['user_id'] = $user['user_id'];
 ?>
             <!-- トップページに戻る -->
             <!DOCTYPE html>
