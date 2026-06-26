@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+/* ==========================================
+   📅 イベント詳細ページ 専用スタイル (Bootstrap 4 最適化版)
+   ========================================== */
+
+/* 1. PC画面（横幅768px以上）での2カラム同期と最低限のサイズ制御 */
+@media (min-width: 768px) {
+  .detail-img-container,
+  .detail-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 480px; /* 💡 左右の高さが綺麗に揃うよう、ベースの最低高さを確保します */
+  }
+}
+
+/* 2. 画像を表示する親枠（paddingをゼロにリセットし目一杯広げる） */
+.detail-img-container {
+  width: 100%;
+  background-color: #ffffff; 
+  padding: 0 !important; /* Bootstrap本来の内側余白をリセット */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3. イベント画像自体の表示設定 */
+.detail-goods-img {
+  width: 100%;
+  height: 100%;
+  /* 💡 イベント詳細ページ用に 'cover' に変更しています。
+        これにより、様々な解像度の写真でも隙間を作らず、美しい比率でダイナミックにトリミング表示されます。
+        もし全体を絶対に入れたい場合は 'contain' に戻してください。 */
+  object-fit: cover; 
+  display: block;
+}
+
+/* 4. パンくずリストやボタンのホバー調整（BBland共通のトーン＆マナー） */
+.breadcrumb a {
+  transition: color 0.2s ease;
+}
+.breadcrumb a:hover {
+  color: #ff7675 !important; /* BBlandピンクで微調整 */
+}
+
+/* 「一覧に戻る」ボタンのホバー調整 */
+.btn-outline-secondary {
+  transition: all 0.2s ease;
+}
+.btn-outline-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 補助用フォントサイズ・レイアウトクラス */
+.fs-7 {
+  font-size: 0.75rem;
+}
+.rounded-pill {
+  border-radius: 50rem !important;
+}
+
+/* ==========================================
+   ✨ 要素が順番にフワッと現れるアニメーション
+   ========================================== */
+
+/* 初期状態：最初は透明で、少し下に配置 */
+.fade-in-item {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: opacity, transform; /* ブラウザの描画を最適化 */
+}
+
+/* JSによってこのクラスがつくとアニメーションが開始 */
+.fade-in-item.is-visible {
+  animation: fadeInUp 5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* アニメーションの軌跡を定義 */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

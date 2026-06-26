@@ -31,7 +31,7 @@ if (!empty($_POST['message'])) {
 
 <div id="breadcrumb">
     <ol>
-        <li><a href="main.php">ホーム</a></li>
+        <li><a href="index.php">ホーム</a></li>
         <li>確認画面</li>
     </ol>
 </div>

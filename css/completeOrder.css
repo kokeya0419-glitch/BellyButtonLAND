@@ -1,0 +1,151 @@
+@charset "utf-8";
+
+/* ==========================================================================
+   注文完了画面（completeOrder）用のスタイル
+   ========================================================================== */
+
+/* 注文完了センターボックス */
+.orderSuccessBox,
+.orderErrorBox {
+    max-width: 650px;
+    margin: 60px auto;
+    padding: 50px 40px;
+    background-color: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+    box-sizing: border-box;
+}
+
+/* 注文完了：装飾アイコンアニメーション */
+.orderSuccessBox .icon-success {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff6f61; /* BBlandメインテーマカラー */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: inline-block;
+    padding: 6px 20px;
+    background-color: #fff2f0;
+    border-radius: 20px;
+}
+
+.orderSuccessBox h1 {
+    font-size: 28px;
+    color: #333;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.orderSuccessBox .thanks-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 35px;
+}
+
+/* 注文番号デザイン用カード */
+.order-number-card {
+    background-color: #fafafa;
+    border: 2px dashed #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    display: inline-block;
+    min-width: 280px;
+    margin-bottom: 40px;
+}
+
+.order-number-card .label {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.order-number-card .number {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+    letter-spacing: 1px;
+}
+
+/* 遷移ボタン */
+.btn-main {
+    display: inline-block;
+    padding: 14px 45px;
+    background: linear-gradient(135deg, #ff8a7a 0%, #ff6f61 100%);
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(255, 111, 97, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 111, 97, 0.3);
+    filter: brightness(1.05);
+}
+
+.btn-main.gray {
+    background: #6c757d;
+    box-shadow: none;
+}
+.btn-main.gray:hover {
+    background: #5a6268;
+    box-shadow: none;
+}
+
+/* --- エラー発生時のボックス装飾 --- */
+.orderErrorBox {
+    border-top: 4px solid #de5d50;
+}
+
+.orderErrorBox .icon-error {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.orderErrorBox h1 {
+    font-size: 24px;
+    color: #de5d50;
+    margin-bottom: 20px;
+}
+
+.orderErrorBox .message {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.orderErrorBox .error-details {
+    font-size: 13px;
+    color: #999;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 20px 0 30px 0;
+    word-break: break-all;
+}
+
+/* スマホ対応（レスポンシブ） */
+@media screen and (max-width: 650px) {
+    .orderSuccessBox, .orderErrorBox {
+        margin: 30px 15px;
+        padding: 40px 20px;
+    }
+    .orderSuccessBox h1 {
+        font-size: 22px;
+    }
+    .order-number-card {
+        width: 100%;
+        min-width: 0;
+    }
+}

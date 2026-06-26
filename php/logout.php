@@ -16,14 +16,14 @@ session_destroy();
 
 <head>
     <meta charset="UTF-8">
-    <!-- <meta http-equiv="refresh" content="3; URL=../main.php"> -->
+    <!-- <meta http-equiv="refresh" content="3; URL=../index.php"> -->
     <title>ログアウト</title>
 </head>
 
 <body class="text-center">
     <p>ログアウトしました。</p>
     <p>3秒後にTOPページへ移動します。</p>
-    <p>自動で戻らない場合は<a href="../main.php">ここをクリック</a></p>
+    <p>自動で戻らない場合は<a href="../index.php">ここをクリック</a></p>
 </body>
 
 

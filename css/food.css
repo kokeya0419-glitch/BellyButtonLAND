@@ -56,7 +56,7 @@
 
 /* フードのテーマ：温かみのあるオレンジ */
 .text-orange {
-    color: #ff9f43 !important;
+    color: #ff7675 !important;
     font-size: 1.2rem !important;
     letter-spacing: 0.5px;
 }
@@ -127,11 +127,11 @@
    5. レイアウト・その他追加スタイル設定
    ========================================== */
 .food-main-container {
-    margin-top: 150px;
+    /* margin-top: 150px; */
 }
 
 .food-title {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     letter-spacing: 2px;
 }
 
@@ -156,8 +156,8 @@
 }
 
 .other-food-title {
-    color: #2d3436;
-    border-left: 5px solid #2d3436;
+    color: #ff9f43;
+    border-left: 5px solid #ff9f43;
     padding-left: 10px;
 }
 
@@ -184,13 +184,13 @@
 .btn-sidebar {
     border-radius: 12px;
     background-color: #fff1c5; /* BBlandの淡い黄色 */
-    color: #ff9f43 !important;  /* フードテーマのオレンジ */
+    color: #ff7675 !important;  /* フードテーマのオレンジ */
     border: none;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .btn-sidebar:hover {
-    background-color: #ff9f43;
+    background-color: #ff7675;
     color: #ffffff !important;
     transform: translateY(-2px);
 }
@@ -207,4 +207,109 @@
         border-radius: 15px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
+}
+
+.chara-placed-area {
+    padding-top: 30px;
+    border-top: 2px dashed #ffe5ec;
+}
+
+
+.item-food-card {
+    cursor: pointer;
+}
+
+
+/* --- フードカードの湯気・きらきらエフェクト用 --- */
+.item-food-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.item-food-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 120, 0, 0.15) !important;
+}
+
+/* 立ち上る湯気・絵文字のスタイル */
+.steam-effect {
+  position: absolute;
+  font-size: 1.2rem;
+  pointer-events: none; /* マウスイベントを邪魔しない */
+  animation: floatUp 1.2s ease-out forwards;
+  z-index: 10;
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(60px) translateX(0) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20px) translateX(var(--random-x, 10px)) scale(1.2);
+    opacity: 0;
+  }
+}
+/* ----------------------------------------------------------------------------------- */
+/* --- 画面右下の「今日のごちそう」抽選ボタン --- */
+.food-gourmet-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  z-index: 1000;
+  background: linear-gradient(45deg, #ff7800, #ffb066);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 24px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(255, 120, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-size: 0.95rem;
+  animation: pulseChef 2s infinite;
+}
+.food-gourmet-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 120, 0, 0.6);
+}
+
+@keyframes pulseChef {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* --- フードおすすめモーダル --- */
+.food-modal {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+.food-modal.is-open {
+  opacity: 1; visibility: visible;
+}
+.food-modal-content {
+  background: #fff; padding: 30px; border-radius: 24px;
+  max-width: 380px; width: 90%; text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transform: scale(0.8); transition: transform 0.3s;
+  border: 4px solid #ffb066;
+}
+.food-modal.is-open .food-modal-content {
+  transform: scale(1);
+}
+.modal-food-img {
+  width: 130px; height: 130px; object-fit: cover; border-radius: 50%;
+  margin-bottom: 15px; border: 3px solid #ff7800;
 }

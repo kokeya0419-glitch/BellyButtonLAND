@@ -1,0 +1,246 @@
+/* 全体のベースデザイン */
+.bb-company-profile {
+  font-family:
+    'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
+    Meiryo, sans-serif;
+  color: #4a3b32; /* 優しいダークブラウン */
+  background-color: #fffaf7; /* 温かみのあるアイボリー */
+  line-height: 1.8;
+}
+
+.bb-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.bb-section {
+  padding: 60px 0;
+}
+
+/* 1. メインビジュアル */
+.bb-hero {
+  /* background: linear-gradient(
+    106deg,
+    #ffe0e0 0%,
+    #ff7472 50%,
+    #fcd3d3 100%
+  ); パークのエネルギーを表すオレンジ */
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px;
+}
+.bb-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.bb-subtitle {
+  font-size: 1rem;
+  margin: 5px 0 0 0;
+  opacity: 0.9;
+}
+
+/* 見出しの共通デザイン */
+.bb-section-title {
+  font-size: 1.8rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+  color: #ff7675;
+}
+.bb-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background-color: #ff7675;
+  border-radius: 2px;
+}
+
+/* 2. 企業理念 */
+.bb-concept {
+  text-align: center;
+  background-color: #fff;
+}
+.bb-catchphrase {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff7675;
+  margin-bottom: 30px;
+}
+.bb-concept-text p {
+  margin-bottom: 15px;
+}
+
+/* 3. 提供する価値（カードレイアウト） */
+.bb-grid.col-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.bb-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(255, 111, 0, 0.05);
+  border: 1px solid #ffebe0;
+}
+.bb-card-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.bb-card h3 {
+  font-size: 1.2rem;
+  color: #ff7675;
+  margin-bottom: 15px;
+}
+
+/* 4. 地域への想い（熊本PRセクション） */
+.bb-regional {
+  background-color: #f1f8f4; /* 熊本の自然をイメージした淡いアースグリーン */
+  border-radius: 16px;
+  margin: 20px auto;
+  max-width: 760px;
+  padding: 40px 30px;
+  text-align: center;
+}
+.bb-regional-badge {
+  display: inline-block;
+  background-color: #2e7d32; /* 深いグリーン */
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+.bb-regional-lead {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1b5e20;
+  margin-bottom: 20px;
+}
+
+/* 5. 会社情報（テーブル） */
+.bb-info {
+  background-color: #fff;
+}
+.bb-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.bb-table tr {
+  border-bottom: 1px solid #ffebe0;
+}
+.bb-table th,
+.bb-table td {
+  padding: 20px;
+  text-align: left;
+  vertical-align: top;
+}
+.bb-table th {
+  width: 30%;
+  font-weight: bold;
+  color: #ff7675;
+}
+.bb-table ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* スマートフォン向けのレスポンシブ調整 */
+@media (max-width: 600px) {
+  .bb-title {
+    font-size: 2rem;
+  }
+  .bb-section-title {
+    font-size: 1.5rem;
+  }
+  .bb-catchphrase {
+    font-size: 1.1rem;
+  }
+  .bb-regional-lead {
+    font-size: 1.05rem;
+  }
+
+  .bb-table th,
+  .bb-table td {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+  }
+  .bb-table th {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .bb-table tr {
+    padding-bottom: 10px;
+    display: block;
+  }
+}
+
+
+/* メインビジュアルのスタイル */
+.bb-hero {
+  padding: 80px 20px;
+  text-align: center;
+  /* JSが動く前のフォールバック背景 */
+  background: linear-gradient(106deg, #ffe0e0 0%, #ff7472 50%, #fcd3d3 100%);
+  /* 文字を白抜きにして視認性を確保（お好みで調整してください） */
+  color: #fff; 
+}
+
+.bb-title {
+  font-size: 2.5rem;
+  margin: 0 0 10px 0;
+  letter-spacing: 2px;
+}
+
+.bb-subtitle {
+  font-size: 1.1rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* 翻訳ボタンのスタイル */
+.lang-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2000;
+  padding: 10px 20px;
+  background-color: #ff7472;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.lang-btn:hover {
+  background-color: #ffe0e0;
+  color: #ff7472;
+  transform: scale(1.05);
+}
+
+/* タイピング中のカーソル点滅エフェクト */
+.typing-cursor::after {
+  content: '|';
+  animation: blink 0.7s infinite;
+  color: #ff7472; /* カーソルの色 */
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

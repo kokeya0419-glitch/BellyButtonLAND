@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+/* ==========================================
+   イベントカード独自のレイアウト・デザイン
+   ========================================== */
+
+/* 1. 縦長2列のカード調整 */
+.event-card {
+    display: flex;
+    flex-direction: column;
+    /* フード用CSSの干渉を防ぐ、または上書きするための設定 */
+    border-radius: 8px !important;
+}
+
+/* 2. 画像ボックスの比率（ワイヤーフレームに合わせた横長比率） */
+.card .event-img-box {
+    width: 100%;
+    aspect-ratio: 8 / 6; /* フードの 1/1(正方形) から、イベント用の少し横長に変更 */
+    background-color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+/* 3. 各種テキストの装飾 */
+.event-name {
+    font-size: 1.1rem !important;
+    color: #2d3436;
+}
+
+.event-description {
+    font-size: 0.85rem !important;
+    color: #555555 !important;
+    line-height: 1.5;
+}
+
+/* 期間テキスト（下部に固定） */
+.event-period {
+    color: #ff9f43 !important; /* テーマカラーのオレンジに合わせて視認性をアップ */
+    font-size: 0.8rem !important;
+    font-weight: bold;
+    border-top: 1px dashed #e0e0e0;
+    padding-top: 8px;
+    margin-top: auto; /* コンテンツ量が違っても常に一番下に揃うように設定 */
+}
+
+/* ==========================================
+   4. サイドバー追従＆デザイン
+   ========================================== */
+.col-lg-3 {
+    position: relative;
+}
+
+.sidebar-sticky {
+    position: sticky;
+    top: 110px !important; /* 固定ヘッダーに隠れない位置 */
+    z-index: 100;
+}
+
+/* サイドバーボタン */
+.btn-sidebar {
+    background-color: #fff1c5; /* 淡い黄色 */
+    color: #ff9f43 !important; /* オレンジ */
+    border: none;
+    border-radius: 12px;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-sidebar:hover {
+    background-color: #ff9f43;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   5. レスポンシブ対応（スマホ・タブレット）
+   ========================================== */
+@media (max-width: 991.98px) {
+    .food-main-container {
+        margin-top: 90px;
+    }
+
+    .sidebar-sticky {
+        position: static !important; /* スマホ時は追従解除 */
+        margin-top: 20px;
+        margin-bottom: 30px;
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-sidebar {
+        padding: 10px 5px !important;
+    }
+}
+
+
+
+.chara-placed-area {
+    padding-top: 30px;
+    border-top: 2px dashed #ffe5ec;
+}

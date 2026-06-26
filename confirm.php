@@ -1,4 +1,6 @@
 <?php
+// ここにページタイトルを入れる
+$page_title = '確認画面';
 $page_css = ["./css/login.css", "./css/confirm.css"];
 require_once 'temp/functions.php';
 include 'temp/header.php';

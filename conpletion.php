@@ -1,5 +1,5 @@
 <?php
-$page_css = ["./css/login.css"];
+$page_css = ["./css/cart.css"];
 require_once './temp/functions.php';
 include './temp/header.php';
 
@@ -32,7 +32,7 @@ try {
     $stmt->bindValue(':pin_code', $pinHash, PDO::PARAM_STR);
     $stmt->execute();
     echo 'ユーザーデータが追加されました。';
-    echo '<a href="main.php">リストへ戻る</a>';
+    echo '<a href="index.php">リストへ戻る</a>';
 ?>
 
     <!-- トップページに戻る -->
@@ -46,7 +46,7 @@ try {
     <body>
         <div id="breadcrumb">
             <ol>
-                <li><a href="./main.php">ホーム</a>&gt;</li>
+                <li><a href="./index.php">ホーム</a>&gt;</li>
                 <li>会員登録完了</li>
             </ol>
         </div>

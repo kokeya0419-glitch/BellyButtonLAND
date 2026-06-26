@@ -1,9 +1,15 @@
 <script src="./js/main.js"></script>
 <script src="./js/atraction.js"></script>
+<!-- <script src="./js/tokusyouho.js"></script>
+<script src="./js/attraction-details.js"></script> -->
+<script src="./js/ticket.js"></script>
+<script src="./js/eventDetail.js"></script>
+<script src="./js/companyInfo.js"></script>
+
 
 
 <audio id="bgm" loop>
-    <source src="./music/Welcome to BellyButtonLAND.mp3" type="audio/mpeg">
+    <source src="./music/BellyButtonLAND.mp3" type="audio/mpeg">
 </audio>
 
 <div id="bgmPopup" class="popup">

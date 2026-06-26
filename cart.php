@@ -1,4 +1,5 @@
 <?php
+$page_css = ["./css/cart.css"];
 require_once './temp/functions.php';
 
 // ここでセッション開始
@@ -26,8 +27,8 @@ if (isset($_POST['goods_id'], $_POST['quantity'])) {
         exit;
     }
 
+    //カートの中身に同じものがあれば乗算する処理+
     $cart_id_array = array_column($cartItem, 'goods_id');
-
     if (in_array($goods_id, $cart_id_array)) {
         $index = array_search($goods_id, $cart_id_array);
         $cartItem[$index]['quantity'] += $quantity;
@@ -41,6 +42,34 @@ if (isset($_POST['goods_id'], $_POST['quantity'])) {
     $_SESSION['cart'] = $cartItem;
 
     // ここでリダイレクト
+    header('Location: cart.php');
+    exit;
+}
+
+// チケット商品をカートに追加する処理
+if (isset($_POST['tickets']) && is_array($_POST['tickets'])) {
+    foreach ($_POST['tickets'] as $goods_id => $quantity) {
+        $goods_id = (int)$goods_id;
+        $quantity = (int)$quantity;
+
+        if ($goods_id <= 0 || $quantity <= 0) {
+            continue;
+        }
+        $cart_id_array = array_column($cartItem, 'goods_id');
+
+        if (in_array($goods_id, $cart_id_array)) {
+            $index = array_search($goods_id, $cart_id_array);
+            $cartItem[$index]['quantity'] += $quantity;
+        } else {
+            $cartItem[] = [
+                'goods_id' => $goods_id,
+                'quantity' => $quantity
+            ];
+        }
+    }
+
+    //ヘッダーロケーションを使って更新してもカートの中身が増えない
+    $_SESSION['cart'] = $cartItem;
     header('Location: cart.php');
     exit;
 }
@@ -149,16 +178,16 @@ $totalAmountTax = 0;
 
                     //合計金額計算
                     $price = (int)$cartItems[$goods_id]['goods_price'];
-                    $taxPrice = (int)($price * (1 + $taxRate));
-                    $subtotal = $taxPrice * $quantity;
+                    // $taxPrice = (int)($price * (1 + $taxRate));
+                    $subtotal = $price * $quantity;
                 ?>
 
                     <tr>
                         <td>
-                            <h3><a href="item.php?id=<?= $goods_id ?>"><?= h($cartItems[$goods_id]['goods_name']) ?></a></h3>
+                            <h3><a href="goodsdetail.php?goods_id=<?= $goods_id ?>"><?= h($cartItems[$goods_id]['goods_name']) ?></a></h3>
                         </td>
                         <td>
-                            <p class="price"><?= number_format($taxPrice) . '<span>円(税込)</span>' ?></p>
+                            <p class="price"><?= number_format($price) . '<span>円(税込)</span>' ?></p>
                         </td>
                         <td>
                             <p class="quantity"><?= number_format($quantity) . '個' ?></p>
@@ -203,8 +232,8 @@ $totalAmountTax = 0;
         <p class="text-center">お買い物合計金額 = <?= number_format($totalAmount) . '円' ?></p>
         <p class="text-center">消費税(10%) = <?= number_format($totalTax) . '円' ?></p>
         <p class="text-center">お買い物金額(税込) = <?= number_format($totalAmountTax) . '円' ?></p> -->
-        <p class="text-center"><button onclick="location.href='./guzz.php'" class="returnShopping">買い物を続ける</button></p>
-        <p class="text-center"><button onclick="location.href='confirmOrder.php'" class="payment">購入商品の確認画面へ</button></p>
+    <p class="text-center"><button onclick="location.href='./guzz.php'" class="returnShopping">買い物を続ける</button></p>
+    <p class="text-center"><button onclick="location.href='confirmOrder.php'" class="payment">購入商品の確認画面へ</button></p>
     </div>
 </article>
 

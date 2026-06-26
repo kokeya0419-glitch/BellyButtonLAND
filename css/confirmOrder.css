@@ -1,0 +1,189 @@
+@charset "utf-8";
+
+/* ==========================================================================
+   注文確認画面（confirmOrder.php）用のスタイル
+   ========================================================================== */
+
+/* 全体コンテナ */
+.orderConfirmBox {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    color: #333;
+}
+
+/* タイトルエリア */
+.orderConfirmBox h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.orderConfirmBox h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #ff6f61; /* BBlandアクセントカラー */
+    border-radius: 2px;
+}
+
+.orderConfirmBox h2.text-center {
+    text-align: center;
+    font-size: 16px;
+    color: #de5d50; /* 最終確認の注意喚起カラー */
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* 金額とフォームの一体化コンテナ */
+.confirmSummary {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 40px;
+    background-color: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+/* 左側：金額詳細 */
+.amountDetails {
+    flex: 1;
+    border-right: 1px dashed #e8e8e8;
+    padding-right: 40px;
+}
+
+.amountDetails .summaryTitle {
+    margin-top: 0;
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #fcedea;
+}
+
+.amountDetails p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #666;
+    margin: 12px 0;
+}
+
+.amountDetails p.totalAmountTaxRow {
+    font-size: 22px;
+    font-weight: bold;
+    color: #de5d50;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* 右側：認証入力・確定エリア */
+.confirmFormArea {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.confirmFormArea .form-group {
+    margin-bottom: 20px;
+}
+
+.confirmFormArea label {
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+/* 入力フォームの装飾 */
+.confirmFormArea .form-control {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 18px;
+    letter-spacing: 4px; /* パスワード伏せ字の間隔を広げて見やすく */
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+    text-align: center;
+}
+
+.confirmFormArea .form-control:focus {
+    border-color: #ff6f61;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.1);
+}
+
+.form-text.text-muted {
+    display: block;
+    font-size: 11px;
+    color: #999;
+    margin-top: 6px;
+}
+
+/* 注文確定ボタン */
+.btn-order-submit {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #ff6f61 0%, #de5d50 100%);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(222, 93, 80, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-order-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(222, 93, 80, 0.4);
+    filter: brightness(1.05);
+}
+
+/* カートに戻るリンク */
+.back-to-cart {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.back-to-cart:hover {
+    color: #ff6f61;
+    text-decoration: underline;
+}
+
+/* レスポンシブ（画面幅が狭い場合） */
+@media screen and (max-width: 768px) {
+    .confirmSummary {
+        flex-direction: column;
+        padding: 20px;
+        gap: 30px;
+    }
+    .amountDetails {
+        border-right: none;
+        border-bottom: 1px dashed #e8e8e8;
+        padding-right: 0;
+        padding-bottom: 20px;
+    }
+    .amountDetails p.totalAmountTaxRow {
+        font-size: 18px;
+    }
+}

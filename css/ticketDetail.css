@@ -1,0 +1,117 @@
+/* ==========================================
+   1. メインレイアウトの設定
+   ========================================== */
+.detail-main-container {
+    margin-top: 0px; /* 元の100pxから減らし、固定ヘッダーの被りを防ぐ最低限の高さに変更 */
+}
+/* ==========================================
+   2. 詳細情報のスタイル
+   ========================================== */
+.detail-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2d3436;
+}
+
+.detail-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2d3436;
+}
+
+.detail-price span {
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+/* ==========================================
+   3. ボタン・入力フォームの設定
+   ========================================== */
+
+/* カートに入れるボタン */
+.btn-purchase {
+    background-color: #7f7fff;
+    color: #ffffff !important;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-purchase:hover {
+    background-color: #6666ff;
+    transform: translateY(-2px);
+}
+
+/* 個数変更エリア（丸くて青いボタン） */
+.btn-qty-blue {
+    background-color: #3a8dff;
+    border: none;
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-qty-blue:hover {
+    background-color: #1c73f3;
+    color: #ffffff;
+}
+
+.btn-qty-blue:active {
+    transform: scale(0.95);
+}
+
+/* 個数入力欄 */
+.qty-input {
+    width: 40px;
+    height: 35px;
+    border: none;
+    background-color: transparent;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333333;
+}
+
+.qty-input:focus {
+    outline: none;
+}
+
+/* ==========================================
+   4. レスポンシブ対応
+   ========================================== */
+@media (max-width: 991.98px) {
+    .detail-main-container {
+        margin-top: 90px;
+    }
+}
+
+
+.btn-back-link {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #f57492; /* ピンク色 */
+    color: #ffffff !important;
+    font-weight: bold;
+    border-radius: 20px; /* 丸みのあるボタン */
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-back-link:hover {
+    background-color: #ff6b8d; /* ホバー時に少し濃いピンクへ */
+    color: #ffffff !important;
+    text-decoration: none;
+    transform: translateY(-2px);
+}

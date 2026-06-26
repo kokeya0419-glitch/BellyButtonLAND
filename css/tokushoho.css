@@ -1,0 +1,79 @@
+/* 特定商取引法に基づく表記==========================================*/
+*/ .policy-page {
+  padding-top: 180px;
+  padding-bottom: 100px;
+  background: #fcfaf7;
+  min-height: 100vh;
+}
+
+.policy-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.policy-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ff6b6b;
+  margin-bottom: 15px;
+}
+
+.policy-header p {
+  color: #666;
+}
+
+.policy-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.policy-box h2 {
+  font-size: 1.3rem;
+  color: #00a8ff;
+  border-left: 6px solid #00a8ff;
+  padding-left: 15px;
+  margin-bottom: 15px;
+}
+
+.policy-box p {
+  margin: 0;
+  line-height: 2;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .policy-page {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .policy-header h1 {
+    font-size: 2rem;
+  }
+
+  .policy-box {
+    padding: 20px;
+  }
+
+  .policy-box h2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* ボタンのスタイル */
+.btn-retry {
+  background-color: #ff7675 !important;
+  color: white !important;
+  padding: 12px 30px;
+  border-radius: 50px !important;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-retry:hover {
+  background-color: #ff5e5d !important;
+  color: white !important;
+}

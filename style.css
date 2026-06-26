@@ -1,7 +1,6 @@
 /* ==========================================
-   1. 全体設定
+   1. 全体設定（通常ページ・共通の設定）
    ========================================== */
-
 body {
   font-family:
     'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
@@ -9,45 +8,64 @@ body {
   color: #333;
   background-color: #fcfaf7;
 
-  /* 💡 初期状態では transition を外すことで、読み込み時の一瞬の崩れを完全に防止 */
-  padding-top: 190px;
+  /* 💡 通常ページ（商品一覧など）は、ヘッダーに隠れないよう上余白を空ける */
+  padding-top: 130px;
 }
 
-/* 💡 スクロールしてヘッダーが縮む「変化の瞬間」だけ、bodyにアニメーションを効かせる */
+/* 💡 通常ページでのスクロール時のヘッダー縮小に伴う余白アニメーション */
 body:has(#top.is-scrolled) {
   padding-top: 100px;
   transition: padding 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* 💡 スクロールが上に戻ってヘッダーが元のサイズに広がる「変化の瞬間」にもアニメーションを効かせる */
 body:not(:has(#top.is-scrolled)) {
   transition: padding 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+main { 
+  min-height: 35vh;
+}
+
+/* ==========================================
+   【重要】トップページ（動画エリアがあるページ）限定の特別上書き設定
+   ========================================== */
+
+/* 💡 トップページだけは、上記の通常用 padding-top を強制的にゼロにして最上部から表示 */
+body:has(.main-video-wrap) {
+  padding-top: 0 !important;
+}
+
+/* 💡 トップページではスクロールしてヘッダーが縮んでも、bodyの余白はゼロのまま固定（ガタつき防止） */
+body:has(.main-video-wrap):has(#top.is-scrolled),
+body:has(.main-video-wrap):not(:has(#top.is-scrolled)) {
+  padding-top: 0 !important;
+  transition: none !important;
+}
+
+/* 💡 トップページ限定で、ヘッダーを動画の「一番手前」に重ねる設定 */
+body:has(.main-video-wrap) #top {
+  position: fixed;
+  z-index: 1000;
 }
 
 /* ==========================================
    2. ヘッダー（通常時とスクロール時）
    ========================================== */
 #top {
-  position: fixed; /* 💡 念のためCSS側でも最上部固定を保証 */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-
-  background-color: #ffffff;
-  padding-top: 15px !important; /* ほんの少しだけ上下を締めて見やすく */
+  padding-top: 15px !important;
   padding-bottom: 15px !important;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: none !important;
 }
 
 /* スクロールした時の透過スタイル */
 #top.is-scrolled {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.1
-  ) !important; /* ほんの少しだけ不透明度を上げ、背後の動画と文字が被っても見やすく調整 */
-  backdrop-filter: blur(12px); /* すりガラス効果を少し強めに */
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding-top: 8px !important;
   padding-bottom: 8px !important;
@@ -58,15 +76,14 @@ body:not(:has(#top.is-scrolled)) {
    3. ロゴ & アニメーション
    ========================================== */
 .logo img {
-  max-height: 150px; /* 通常時はインパクト大の150px */
+  max-height: 100px;
   width: auto;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
 }
 
-/* スクロール時は、ロゴを少し小さくしてコンテンツの邪魔をしないようにする */
 #top.is-scrolled .logo img {
-  max-height: 80px; /* 150px から 80px にスマートに変形 */
+  max-height: 80px;
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
 }
 
@@ -74,7 +91,6 @@ body:not(:has(#top.is-scrolled)) {
   transform: scale(1.06) rotate(-2deg);
 }
 
-/* スクロール時は「ようこそ」の吹き出しも少しコンパクトに */
 #top.is-scrolled .bb-welcome {
   font-size: 0.95rem;
   padding: 6px 14px;
@@ -112,121 +128,122 @@ body:not(:has(#top.is-scrolled)) {
    ========================================== */
 .navbar-nav .nav-link {
   display: block;
-  padding: 8px 16px !important; /* Bootstrapの余白を上書き */
-  font-size: 0.95rem;
+  padding: 8px 16px !important;
+  font-size: 13px;
   font-weight: bold;
   color: #4a4a4a !important;
   border-radius: 20px;
   transition: all 0.2s ease;
-  text-align: center; /* スマホ時にメニュー文字を中央寄せに */
+  text-align: center;
 }
 
-/* 通常メニュー（グッズ〜問合せ）のホバー：優しいお菓子のような薄黄色の背景に */
 .navbar-nav .nav-item:not(.ml-lg-4):not(.ml-lg-2) .nav-link:hover {
   background-color: #fff1c5;
-  color: #ff7675 !important; /* 文字をBBlandピンクに */
+  color: #ff7675 !important;
 }
 
-/* 💡 ログインボタンの個別デザイン */
 .navbar-nav .nav-link.nav-login {
-  background-color: #f1f2f6; /* 落ち着いたライトグレー */
+  background-color: #f1f2f6;
   color: #57606f !important;
 }
 
 .navbar-nav .nav-link.nav-login:hover {
-  background-color: #dfe4ea; /* ホバーで少し濃く */
+  background-color: #dfe4ea;
   color: #2f3542 !important;
 }
 
-/* 💡 カートボタンの個別デザイン（一番目立たせる！） */
 .navbar-nav .nav-link.nav-cart {
-  background-color: #ff7675; /* BBlandの主役ピンク */
+  background-color: #ff7675;
   color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(255, 118, 117, 0.3); /* ボタンにフワッとした立体感 */
+  box-shadow: 0 4px 12px rgba(255, 118, 117, 0.3);
 }
 
 .navbar-nav .nav-link.nav-cart:hover {
-  background-color: #e84118; /* ホバーで少し濃い赤ピンクに */
-  transform: translateY(-1px); /* ボタンが少し浮き上がる演出 */
+  background-color: #e84118;
+  transform: translateY(-1px);
   box-shadow: 0 6px 15px rgba(255, 118, 117, 0.4);
 }
 
-/* カート内の数字バッジの調整 */
 .nav-cart .badge {
-  color: #ff7675 !important; /* 数字の色をピンクにして見やすく */
+  color: #ff7675 !important;
   font-size: 0.8rem;
   padding: 4px 7px;
-}
-
-/* 📱 スマホ時の横幅いっぱい調整用の補助クラス */
-@media (max-width: 991.98px) {
-  .w-100-sm {
-    width: 100%;
-  }
 }
 
 /* ==========================================
    6. 📱 スマホ・タブレット用のレスポンシブ微調整
    ========================================== */
 @media (max-width: 991.98px) {
-  .logo img {
-    max-height: 90px; /* スマホ時は少し小さめにキープ */
-  }
-
-  /* スマホ時のbodyの上余白を調整 */
   body {
-    padding-top: 60px;
+    padding-top: 60px; /* 通常ページのスマホ用余白 */
   }
 
-  /* スマホで縦並びになったメニューの隙間を調整 */
+  /* 💡 トップページであればスマホでも上余白をゼロにする */
+  body:has(.main-video-wrap) {
+    padding-top: 0 !important;
+  }
+
+  .logo img {
+    max-height: 90px;
+  }
+
   .navbar-nav .nav-item {
     margin-top: 10px;
   }
+
+  .w-100-sm {
+    width: 100%;
+  }
 }
+
 /* ==========================================
-   7. メインビデオのサイズ・画質荒れ調整
+   7. メインビデオのサイズ・位置調整
    ========================================== */
 .main-video-wrap {
-  max-width: 1200px; /* 💡 動画が大きくなりすぎないように上限をロック（画質荒れを防止） */
-  margin: 0 auto; /* 画面の中央に配置 */
-  border-radius: 20px; /* 角を丸くして優しく洗練された印象に */
-  overflow: hidden; /* 角丸からはみ出た動画をカット */
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); /* 💡 枠に高級感のある柔らかな影をプラス */
-  background-color: #000; /* 動画が読み込まれる一瞬の間、背景を黒にして引き締める */
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  background-color: #000;
 }
 
 .main-video-wrap video {
-  width: 100%; /* 設定した最大幅（960px）に対してピッタリ100%で広げる */
-  height: auto; /* 縦横比（アスペクト比）を崩さずに綺麗に保つ */
-  display: block; /* 動画の下に変な隙間ができるのを防ぐ */
-  object-fit: cover; /* 枠内に隙間なく綺麗に収める設定 */
+  width: 100%;
+  height: 100vh; /* 💡 画面いっぱいに縦幅を広げる */
+  display: block;
+  object-fit: cover;
 }
 
-/* 📱 スマホ画面（横幅が狭い時）の微調整 */
 @media (max-width: 991.98px) {
   .main-video-wrap {
-    max-width: 100%; /* スマホの時は左右いっぱいにフィットさせる */
-    border-radius: 0; /* スマホ時は角丸をなくして画面を広く使う（お好みで外してもOKです） */
+    max-width: 100%;
+    border-radius: 0;
     box-shadow: none;
   }
 }
 
+video {
+  position: fixed;
+  z-index: -1;
+}
+.main-visual {
+  height: 90vh;
+}
+
+
 /* ==========================================
-   8. おすすめグッズセクション（追加）
+   8. おすすめグッズ・アトラクション等
    ========================================== */
-/* セクションのタイトル装飾 */
 .section-title {
-  font-size: 2rem;
-  font-weight: 900;
-  color: #ff7675; /* テーマカラーのピンク */
-  letter-spacing: 0.05em;
-  position: relative;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff7675;
+  /* letter-spacing: 0.05em; */
+  /* position: relative; */
   display: inline-block;
   margin-bottom: 10px;
 }
 
-/* タイトルの下に引く可愛いドットの波線 */
-.section-title::after {
+/* .section-title::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -234,9 +251,9 @@ body:not(:has(#top.is-scrolled)) {
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background-color: #fff1c5; /* 薄黄色 */
+  background-color: #fff1c5;
   border-radius: 2px;
-}
+} */
 
 .section-subtitle {
   font-size: 0.95rem;
@@ -244,24 +261,25 @@ body:not(:has(#top.is-scrolled)) {
   font-weight: bold;
 }
 
-/* 商品カード全体のホバーアニメーション */
 .item-card {
   border-radius: 20px !important;
   overflow: hidden;
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .item-card:hover {
-  transform: translateY(-8px); /* カード全体がフワッと上に浮き上がる */
-  box-shadow: 0 15px 30px rgba(255, 118, 117, 0.15) !important; /* 影をBBlandピンクに */
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* 画像エリアの調整（ホバー時に画像が少し拡大する仕掛け） */
 .item-img-box {
   position: relative;
   overflow: hidden;
   background-color: #efefef;
-  aspect-ratio: 1 / 1; /* 💡 画像を綺麗な正方形に統一する設定 */
+  aspect-ratio: 1 / 1;
 }
 
 .item-img-box img {
@@ -272,10 +290,9 @@ body:not(:has(#top.is-scrolled)) {
 }
 
 .item-card:hover .item-img-box img {
-  transform: scale(1.05); /* マウスホバーで画像がズームイン */
+  transform: scale(1.05);
 }
 
-/* 「NEW」や「POPULAR」のバッジ */
 .badge-status {
   position: absolute;
   top: 12px;
@@ -287,7 +304,6 @@ body:not(:has(#top.is-scrolled)) {
   letter-spacing: 0.05em;
 }
 
-/* 商品名と価格 */
 .item-name {
   font-size: 1.05rem;
   font-weight: bold;
@@ -308,10 +324,9 @@ body:not(:has(#top.is-scrolled)) {
   font-weight: normal;
 }
 
-/* 「カートに入れる」ボタンのカスタム */
 .btn-add-cart {
-  background-color: #fff1c5; /* 薄黄色 */
-  color: #ff7675 !important; /* ピンク文字 */
+  background-color: #fff1c5;
+  color: #ff7675 !important;
   font-weight: bold;
   border-radius: 15px;
   border: none;
@@ -320,50 +335,37 @@ body:not(:has(#top.is-scrolled)) {
 }
 
 .btn-add-cart:hover {
-  background-color: #ff7675; /* ホバーで色が反転！ */
+  background-color: #ff7675;
   color: #ffffff !important;
 }
-/* 商品カード全体をホバーしたときのアニメーション */
-.item-card {
-  cursor: pointer; /* カーソルを指マークにする */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.item-card:hover {
-  transform: translateY(-5px); /* カードを5px上に持ち上げる */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important; /* 影を少し強くして立体感を出す */
-}
 /* ==========================================
    9. フッターセクション
    ========================================== */
 footer {
-  background-color: #2f3542; /* 💡 パークの夜をイメージした上品なダークグレー */
+  background-color: #2f3542;
   color: #f1f2f6;
 }
 
-/* フッターのブランドロゴ */
 .footer-logo {
   font-size: 1.8rem;
   font-weight: 900;
-  color: #ff7675; /* BBlandピンク */
+  color: #ff7675;
   letter-spacing: 0.05em;
 }
 
-/* フッターの紹介テキスト・コピーライト */
 .footer-text {
   color: #a4b0be;
   line-height: 1.6;
 }
 
-/* 各ブロックの見出し */
 .footer-title {
   font-size: 0.95rem;
   font-weight: bold;
-  color: #fff1c5; /* 💡 夜空に映える薄黄色 */
+  color: #fff1c5;
   letter-spacing: 0.08em;
 }
 
-/* リンクメニュー */
 .footer-links li {
   margin-bottom: 10px;
 }
@@ -376,13 +378,30 @@ footer {
   transition: color 0.2s ease;
 }
 
-/* リンクホバー時にテーマピンクへ鮮やかに変化 */
 .footer-links a:hover {
   color: #ff7675;
   text-decoration: none;
 }
 
-/* 区切り線のカラー調整 */
 .footer-divider {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* ==========================================
+   10. スクロールふわっとアニメーション
+   ========================================== */
+/* 最初（画面外）の状態：少し下に配置して透明にする */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(200px); /* 40px下から */
+  transition:
+    opacity 5s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none; /* アニメーション中の誤クリック防止 */
+}
+
+/* 画面内に入った時（showクラスがついた時）の状態：元の位置に戻して不透明にする */
+.fade-in-up.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }

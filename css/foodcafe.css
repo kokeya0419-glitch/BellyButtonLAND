@@ -1,0 +1,194 @@
+@charset "UTF-8";
+
+/* ==========================================
+   1. メインレイアウト・タイトルの設定
+   ========================================== */
+.food-main-container {
+  /* margin-top: 100px; 固定ヘッダー分の余白 */
+  transition: margin-top 0.3s ease;
+}
+
+.title-area {
+  border-bottom: 2px solid #2d3436 !important;
+}
+
+.food-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff7675;
+  letter-spacing: 1px;
+}
+
+/* お気に入りハートアイコン */
+.title-heart {
+  cursor: pointer;
+  color: #2d3436;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.title-heart:hover {
+  transform: scale(1.1);
+  color: #ff7675;
+}
+
+.title-heart.active {
+  color: #ef476f;
+}
+
+/* ==========================================
+   2. 店舗情報（店舗名と案内文）
+   ========================================== */
+.shop-name {
+  font-size: 1.2rem;
+  color: #2d3436;
+  margin-top: 20px;
+}
+
+/* 店舗案内文のグレーボックス */
+.shop-description-box {
+  background-color: #e0e0e0;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.shop-description-box p {
+  font-size: 0.9rem;
+  color: #555555 !important;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   3. フードカード
+   ========================================== */
+.card {
+  background-color: #ffffff;
+  border-radius: 8px !important;
+  overflow: hidden; /* 画像や中身のはみ出しを強制カット */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 画像を表示する正方形エリア */
+.card .img-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 0 !important;
+}
+
+/* プレースホルダーテキスト */
+.card .img-box::before {
+  content: 'img';
+  position: absolute;
+  color: #777;
+  font-size: 1.2rem;
+  z-index: 1;
+}
+
+/* 画像自体のサイズ指定（重複プロパティをスリム化） */
+.card .img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 縦横比を維持しながら枠内にピッタリ収める */
+  position: relative;
+  z-index: 2;
+  border-radius: 0 !important;
+  transition: transform 0.3s ease;
+}
+
+/* ホバー時に画像を少しだけ拡大 */
+.card:hover .img-box img {
+  transform: scale(1.04);
+}
+
+/* フードカード内 文字装飾 */
+.card h4 {
+  color: #2d3436;
+  font-size: 0.9rem !important;
+  margin-bottom: 4px;
+}
+
+.card p.text-muted {
+  color: #777777 !important;
+  font-size: 0.75rem !important;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.text-orange {
+  color: #2d3436 !important;
+  font-size: 0.85rem !important;
+  font-weight: bold;
+}
+
+/* ==========================================
+   4. サイドバー追従＆デザイン
+   ========================================== */
+.col-lg-3 {
+  position: relative;
+}
+
+.sidebar-sticky {
+  position: sticky;
+  top: 110px !important; /* 固定ヘッダーに隠れない位置 */
+  z-index: 100;
+}
+
+/* サイドバーボタン */
+.btn-sidebar {
+  background-color: #fff1c5; /* 淡い黄色 */
+  color: #ff7675 !important; /* オレンジ */
+  border: none;
+  border-radius: 12px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-sidebar:hover {
+  background-color: #ff7675;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   5. レスポンシブ対応（スマホ・タブレット）
+   ========================================== */
+@media (max-width: 991.98px) {
+  .food-main-container {
+    margin-top: 90px;
+  }
+
+  .sidebar-sticky {
+    position: static !important; /* スマホ時は追従解除 */
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-sidebar {
+    padding: 10px 5px !important;
+  }
+}
+

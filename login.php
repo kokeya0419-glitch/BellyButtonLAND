@@ -1,4 +1,6 @@
 <?php
+// ここにページタイトルを入れる
+$page_title = 'ログイン';
 $page_css = ["./css/login.css"];
 require_once 'temp/functions.php';
 include 'temp/header.php';
@@ -9,7 +11,7 @@ $error = [];
 // 💡 改善：すでにログイン済みの場合はTOPページへ飛ばす
 if (!empty($_SESSION['login'])) {
     $message = 'ログイン済みです。';
-    header('Location: ./main.php');
+    header('Location: ./index.php');
     exit;
 }
 
@@ -65,14 +67,14 @@ if (empty($error)) {
 
             <head>
                 <meta charset="UTF-8">
-                <meta http-equiv="refresh" content="3; URL=./main.php">
+                <meta http-equiv="refresh" content="2; URL=./index.php">
                 <title>ログイン完了</title>
             </head>
 
             <body class="text-center">
                 <p>ログインしました。</p>
-                <p>3秒後にTOPページへ移動します。</p>
-                <p>自動で戻らない場合は<a href="./main.php">ここをクリック</a></p>
+                <p>2秒後にTOPページへ移動します。</p>
+                <p>自動で戻らない場合は<a href="./index.php">ここをクリック</a></p>
             </body>
 
             </html>

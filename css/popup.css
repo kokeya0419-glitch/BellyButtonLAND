@@ -1,0 +1,50 @@
+/* Loading背景画面設定　*/
+#splash {
+    /*fixedで全面に固定*/
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background: #333;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* Loading画像中央配置　*/
+#splash_logo {
+    position: absolute;
+    inset: 0;
+
+    background: url("./img/logout.png") center center / contain no-repeat;
+    background-color: #333;
+}
+
+/* Loading アイコンの大きさ設定　*/
+#splash_logo img {
+    width: 100%;
+    height: 100%;
+    object-position: center top;
+    display: block;
+}
+
+/* fadeUpをするアイコンの動き */
+.fadeUp {
+    animation-name: fadeUpAnime;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes fadeUpAnime {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

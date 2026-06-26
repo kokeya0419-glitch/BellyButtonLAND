@@ -1,0 +1,216 @@
+@charset "UTF-8";
+
+/* ==========================================
+   1. メインレイアウト・タイトルの設定
+   ========================================== */
+.food-main-container {
+  margin-top: 100px; /* 固定ヘッダー分の余白 */
+  transition: margin-top 0.3s ease;
+}
+
+.title-area {
+  /* border-bottom: 2px solid #2d3436 !important; */
+}
+
+.food-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff7675;
+  letter-spacing: 1px;
+}
+
+/* お気に入りハートアイコン */
+.title-heart {
+  cursor: pointer;
+  color: #2d3436;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.title-heart:hover {
+  transform: scale(1.1);
+  color: #ff7675;
+}
+
+.title-heart.active {
+  color: #ef476f;
+}
+
+/* ==========================================
+   2. チケット購入エリアの独自パーツ
+   ========================================== */
+
+/* 「チケットのご購入はこちら」のグレー背景ボックス */
+.ticket-header-box {
+  background-color: #e0e0e0;
+  padding: 15px;
+  border-radius: 4px;
+  color: #2d3436;
+  font-size: 1.1rem;
+}
+
+/* 上部チケットナビゲーションボタン */
+.btn-ticket-tab {
+  background-color: #e0e0e0;
+  color: #333333;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 4px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.btn-ticket-tab:hover {
+  background-color: #d0d0d0;
+  color: #000;
+}
+
+/* 各チケットセクションのグレーの見出し帯 */
+.ticket-section-title {
+  background-color: #e0e0e0;
+  padding: 8px 15px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #2d3436;
+  border-radius: 4px;
+}
+
+/* チケットカード基本スタイル */
+.ticket-card {
+  background-color: #f5f5f5; /* 画像読み込み前のデフォルト背景色 */
+  border-radius: 6px;
+  padding: 25px 20px 15px 20px;
+  text-align: center;
+  position: relative; /* 子要素のimgを絶対配置するための基準点 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* 角丸から画像がはみ出さないように設定 */
+  z-index: 1; /* 内包する文字などを前面に出す基準 */
+}
+
+/* HTMLのimgタグ背景画像に対する設定と透明度 */
+.ticket-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 枠に合わせて綺麗にトリミング・拡大縮小 */
+  z-index: -1; /* 文字（大人用や価格）の後ろに回り込ませる */
+
+  /* 透明度（調整用）：0が完全透明、1が完全不透明 */
+  opacity: 0.35; /* 35%の不透明度（＝画像を薄く透過させ、文字の可読性を確保） */
+}
+
+.ticket-type {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2d3436;
+  margin-bottom: 8px;
+}
+
+.ticket-price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2d3436;
+  margin-bottom: 5px;
+}
+
+.btn-purchase {
+  background-color: #7f7fff;
+  color: #ffffff !important;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 4px 15px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
+  z-index: 2; /* 背景画像より手前で確実にクリックできるように設定 */
+}
+
+.btn-purchase:hover {
+  background-color: #6666ff;
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   3. サイドバー追従＆デザイン（共通維持）
+   ========================================== */
+.col-lg-3 {
+  position: relative;
+}
+
+.sidebar-sticky {
+  position: sticky;
+  top: 80px;
+  z-index: 100;
+}
+
+.btn-sidebar {
+  background-color: #fff1c5;
+  color: #ff7675 !important;
+  border: none;
+  border-radius: 12px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-sidebar:hover {
+  background-color: #ff7675;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   4. レスポンシブ対応
+   ========================================== */
+@media (max-width: 991.98px) {
+  .ticket-main-container {
+    margin-top: 110px;
+  }
+
+  .sidebar-sticky {
+    position: static !important;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-sidebar {
+    padding: 10px 5px !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .btn-ticket-tab {
+    font-size: 0.7rem;
+    padding: 6px 2px;
+  }
+
+  .ticket-card {
+    padding: 20px 15px 10px 15px;
+  }
+}
+
+/* ページ内リンクで飛び先がヘッダーに被るのを防ぐ設定 */
+.ticket-section {
+  scroll-margin-top: 200px; /* 固定ヘッダーの高さ（約80〜90px）分の余白を作る */
+}
+
+.chara-placed-area {
+  padding-top: 30px;
+  border-top: 2px dashed #ffe5ec;
+}

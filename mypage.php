@@ -1,9 +1,11 @@
 <?php
+// ここにページタイトルを入れる
+$page_title = 'Mypage';
 require_once './temp/functions.php';
 include './temp/header.php';
 
 if (empty($_SESSION['login'])) {
-    echo '<main class="container mt-5 pt-5 text-center">';
+    echo '<main class="container mt-5 pt-5 text-center ">';
     echo '<h1>ログインしてください</h1>';
     echo '<p><a href="login.php">ログインページへ</a></p>';
     echo '</main>';

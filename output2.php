@@ -35,7 +35,7 @@ fclose($file);
 
 <div id="breadcrumb">
     <ol>
-        <li><a href="main.php">ホーム</a></li>
+        <li><a href="index.php">ホーム</a></li>
         <li>送信完了</li>
     </ol>
 </div>

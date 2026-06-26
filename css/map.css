@@ -1,0 +1,108 @@
+/* ==========================================
+  園内マップ専用スタイル (mappu.css)
+   ========================================== */
+
+/* カードデザインを洗練させる */
+.category-card {
+  border-radius: 16px !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 5px solid #ff7675;
+  /* アクセントカラー */
+  border-top: 1px solid #eee;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* タイトルとバッジ */
+.category-title {
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.category-badge {
+  display: inline-block;
+  background-color: #4609bf;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.category-badge1 {
+  display: inline-block;
+  background-color: #0de363;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.category-badge2 {
+  display: inline-block;
+  background-color: #854ef2;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+
+}
+
+.category-badge3 {
+  display: inline-block;
+  background-color: #bf7309;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+
+}
+
+/* リストのレイアウト */
+.attraction-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.attraction-list li {
+  padding: 8px 0;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px dashed #f1f1f1;
+}
+
+.list-num {
+  color: #ff7675;
+  font-weight: bold;
+  margin-right: 12px;
+  min-width: 28px;
+  text-align: center;
+  background: #fff5f5;
+  border-radius: 4px;
+}
+
+/* マップ画像のレスポンシブ微調整 */
+.img-fluid.border {
+  border-color: #dee2e6 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* スマホ表示時、ヘッダーとガイドマップのタイトルが重なるのを防ぐ */
+@media (max-width: 991px) {
+  .pt-lg-4 {
+    padding-top: 5rem !important;
+    /* スマホ用に上部余白を大きく確保 */
+  }
+}

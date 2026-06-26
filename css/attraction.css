@@ -19,13 +19,15 @@
   border-radius: 12px !important;
   overflow: hidden;
   background-color: #ffffff;
-  height: 100px; /* 横長カードの高さを綺麗に統一 */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 120px; /* 横長カードの高さを綺麗に統一 */
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .attraction-horizontal-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.06) !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06) !important;
 }
 
 .card-img-wrap {
@@ -47,14 +49,14 @@
 }
 /* PC表示の際のサイドバー追従位置 */
 .sidebar-sticky {
-    top: 200px;
+  top: 200px;
 }
 
 /* サイドバーの追従設定 */
 .sidebar-sticky {
   position: -webkit-sticky; /* Safari対応 */
-  position: sticky;         /* ここで追従を有効化 */
-  top: 120px;               /* ヘッダーの高さ分を空けて固定 */
+  position: sticky; /* ここで追従を有効化 */
+  top: 120px; /* ヘッダーの高さ分を空けて固定 */
   z-index: 10;
 }
 
@@ -75,4 +77,47 @@
 .btn-side-menu:hover {
   background-color: #ffeaa7;
   transform: translateX(3px); /* ホバー時に少し右に動く */
+}
+
+/* ==========================================
+   11. アトラクションカード全体のクリックエリア設定
+   ========================================== */
+.attraction-horizontal-card {
+  cursor: pointer; /* マウスを乗せたときに自動でクリック可能な手の形になります */
+}
+
+.chara-placed-area {
+  padding-top: 30px;
+  border-top: 2px dashed #ffe5ec; /* 可愛い点線で区切る */
+}
+
+
+
+/* --- アニメーションの初期状態（隠れている状態） --- */
+.bb-animate {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+
+/* 下から上へ */
+.fade-up {
+  transform: translateY(40px);
+}
+
+/* 左から右へ */
+.fade-left {
+  transform: translateX(-50px);
+}
+
+/* 右から左へ */
+.fade-right {
+  transform: translateX(50px);
+}
+
+/* --- 画面内に入った時の状態（表示） --- */
+.bb-animate.is-visible {
+  opacity: 1;
+  transform: translate(0, 0); /* 元の位置に戻す */
 }

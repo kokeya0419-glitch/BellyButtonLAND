@@ -1,4 +1,5 @@
 <?php
+$page_css = ["./css/cart.css, ./css/completeOrder.css"];
 
 $cartItem = $_SESSION['cart'] ?? [];
 if (empty($cartItem)) {
@@ -16,6 +17,7 @@ if ($user_id === null) {
 $totalAmountTax = 0;
 
 try {
+    $dbh = db_open();
     //order_detaileテーブルに一連の商品登録処理を行う
     //beginTransaction();はロールバックできるようにセーブポイントのようなメソッド
     $dbh->beginTransaction();
@@ -35,13 +37,13 @@ try {
     $dbh = db_open();
     $sql = 'SELECT * FROM goods WHERE goods_id IN(' . implode(',', $placeholder) . ')';
     $stmt = $dbh->prepare($sql);
-    foreach($params as $key => $index){
-        $stmt -> bindValue($key, $index, PDO::PARAM_INT);
+    foreach ($params as $key => $index) {
+        $stmt->bindValue($key, $index, PDO::PARAM_INT);
     }
     $stmt->execute();
 
     $cartItem = [];
-    foreach($stmt -> fetchAll(PDO::FETCH_ASSOC) as $item){
+    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $item) {
         $cartItems[(int)$item['goods_id']] = $item;
     }
 
@@ -49,7 +51,7 @@ try {
         $goods_id = (int)$index['goods_id'];
         $quantity = (int)$index['quantity'];
 
-        if(!isset($cartItems[$goods_id])){
+        if (!isset($cartItems[$goods_id])) {
             throw new EXception('商品が見当たりません');
         }
 
@@ -88,10 +90,10 @@ try {
 
     //注文された数の商品を在庫から減らして、売上数を増やす処理
     $sql = 'UPDETA goods SET stock = stock - :quantity, sold_count = sold_count + :quantity WHERE goods_id = :goods_id';
-    $stmt = $dbh -> prepare($sql);
-    $stmt -> bindValue(':quantity', $quantity, PDO::PARAM_INT);
-    $stmt -> bindValue(':goods_id', $goods_id, PDO::PARAM_INT);
-    $stmt -> execute();
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':quantity', $quantity, PDO::PARAM_INT);
+    $stmt->bindValue(':goods_id', $goods_id, PDO::PARAM_INT);
+    $stmt->execute();
 
     //処理が無事に終われば注文処理をコミットする。
     $dbh->commit();
@@ -103,7 +105,7 @@ try {
     echo '<main class="container mt-5 pt-5 text-center">';
     echo '<h1>注文完了</h1>';
     echo '<p>ご注文ありがとうございました。</p>';
-    echo '<p><a href="main.php">トップページへ戻る</a></p>';
+    echo '<p><a href="index.php">トップページへ戻る</a></p>';
     echo '</main>';
     include './temp/footer1.php';
     include './temp/footer2.php';

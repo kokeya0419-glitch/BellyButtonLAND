@@ -1,5 +1,5 @@
 /* ==========================================
-   BBland 会員ログイン画面専用スタイル
+   BBland 会員ログイン・登録画面共通スタイル
    ========================================== */
 
 /* --- 1. パンくずリストの装飾 --- */
@@ -47,7 +47,7 @@ article h1 {
   color: #ff7675; /* BBlandピンク */
   text-align: center;
   letter-spacing: 0.05em;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 /* 案内文（会員登録がお済みでない方は…） */
@@ -91,7 +91,7 @@ p.warning {
   box-shadow: 0 4px 15px rgba(255, 118, 117, 0.05);
 }
 
-/* --- 4. ログインフォーム（白いカード部分） --- */
+/* --- 4. フォーム（白いカード部分） --- */
 .contents {
   background-color: #ffffff;
   border-radius: 25px;
@@ -99,7 +99,7 @@ p.warning {
   box-shadow: 0 10px 30px rgba(255, 118, 117, 0.06); /* ほんのりピンクを混ぜた影 */
 }
 
-/* ラベル（メールアドレス / パスワード） */
+/* ラベル共通 */
 .formFlex label,
 .label label {
   font-size: 0.85rem;
@@ -107,6 +107,7 @@ p.warning {
   color: #57606f;
   margin-left: 4px;
   display: inline-block;
+  margin-top: 10px;
 }
 
 /* pタグのデフォルトの余白をリセット */
@@ -116,9 +117,11 @@ p.warning {
   margin: 0;
 }
 
-/* 入力エリア（メールアドレス・パスワード共通） */
+/* 入力エリア（登録画面の全テキスト項目に一括適用） */
+.field input[type="text"],
 .field input[type="email"],
-.field input[type="password"] {
+.field input[type="password"],
+.field input[type="tel"] {
   width: 100%;
   border-radius: 15px;
   padding: 14px 18px;
@@ -130,20 +133,22 @@ p.warning {
   box-sizing: border-box; /* パディングによる幅の突き抜け防止 */
   transition: all 0.2s ease;
   margin-top: 6px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /* 入力欄をクリック（フォーカス）したときのアニメーション */
+.field input[type="text"]:focus,
 .field input[type="email"]:focus,
-.field input[type="password"]:focus {
+.field input[type="password"]:focus,
+.field input[type="tel"]:focus {
   border-color: #ff7675;
   background-color: #ffffff;
   box-shadow: 0 0 0 4px rgba(255, 118, 117, 0.1); /* 周りをフワッとピンクに光らせる */
 }
 
-/* --- 5. 会員ログインボタン --- */
+/* --- 5. 送信ボタン --- */
 .contents form p.text-center {
-  margin: 10px 0 0 0;
+  margin: 25px 0 0 0;
 }
 
 .contents form p.text-center button[type="submit"] {

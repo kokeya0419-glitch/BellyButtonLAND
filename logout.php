@@ -2,7 +2,7 @@
 
 
 $page_css = ["./css/login.css"];
-include './temp/header.php';
+include './temp/headerLogout.php';
 require_once './temp/functions.php';
 
 
@@ -14,22 +14,17 @@ session_destroy();
 
 //トップページへ遷移
 ?>
-<!-- トップページに戻る -->
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="3; URL=./main.php">
-    <title>ログアウト</title>
-</head>
 
 <body class="text-center">
+    </div>
     <p>ログアウトしました。</p>
     <p>3秒後にTOPページへ移動します。</p>
-    <p>自動で戻らない場合は<a href="./main.php">ここをクリック</a></p>
-</body>
+    <p>自動で戻らない場合は<a href="./index.php">ここをクリック</a></p>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXv
+ZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="./js/popup.js"></script>
+</body>
 
 </html>
 
